@@ -3,6 +3,7 @@ package com.example.thegioitruyen
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager.widget.PagerAdapter
@@ -21,6 +22,30 @@ class UserHomeActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(view)
         pageAdapter = FragmentPageUserHomeAdapter(supportFragmentManager,lifecycle)
+        // tao tab con moi
+        //tab1
+        var tab1: TabLayout.Tab=binding.tabLayoutUserHome.newTab()
+        tab1.setText(R.string.titleTab1)
+        tab1.setIcon(R.drawable.icon_comic)
+        //tab2
+        var tab2: TabLayout.Tab=binding.tabLayoutUserHome.newTab()
+        tab2.setText(R.string.titleTab2)
+        tab2.setIcon( R.drawable.icon_text)
+        //tab3
+        var tab3: TabLayout.Tab=binding.tabLayoutUserHome.newTab()
+        tab3.setText(R.string.titleTab3)
+        tab3.setIcon( R.drawable.icon_book)
+        //tab4
+        var tab4: TabLayout.Tab=binding.tabLayoutUserHome.newTab()
+        tab4.setText(R.string.titleTab4)
+        tab4.setIcon( R.drawable.icon_setting)
+        //add tab
+        binding.tabLayoutUserHome.addTab(tab1)
+        binding.tabLayoutUserHome.addTab(tab2)
+        binding.tabLayoutUserHome.addTab(tab3)
+        binding.tabLayoutUserHome.addTab(tab4)
+
+        ///
         binding.viewPaper2UserHome.adapter=pageAdapter
         binding.tabLayoutUserHome.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
