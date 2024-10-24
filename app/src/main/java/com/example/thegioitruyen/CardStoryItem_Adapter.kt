@@ -1,20 +1,15 @@
 package com.example.thegioitruyen
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.os.AsyncTask
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.thegioitruyen.databinding.CardStoryItemLayoutBinding
 
 
-
-class CardStoryItemAdapter(private val dataList: ArrayList<CardStoryItemDataClass>)
-    : RecyclerView.Adapter<CardStoryItemAdapter.ViewHolderClass>(){
+class CardStoryItem_Adapter(private val dataList: ArrayList<CardStoryItem_DataClass>)
+    : RecyclerView.Adapter<CardStoryItem_Adapter.ViewHolderClass>(){
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int

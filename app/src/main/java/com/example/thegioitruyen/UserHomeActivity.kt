@@ -3,17 +3,13 @@ package com.example.thegioitruyen
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.example.thegioitruyen.databinding.ActivityUserHomeBinding
 import com.google.android.material.tabs.TabLayout
 
 class UserHomeActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUserHomeBinding
-    private lateinit var pageAdapter: FragmentPageUserHomeAdapter
+    private lateinit var pageAdapter: FragmentPage_UserHome_Adapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +17,7 @@ class UserHomeActivity : AppCompatActivity() {
         val view = binding.root
         enableEdgeToEdge()
         setContentView(view)
-        pageAdapter = FragmentPageUserHomeAdapter(supportFragmentManager,lifecycle)
+        pageAdapter = FragmentPage_UserHome_Adapter(supportFragmentManager,lifecycle)
         // tao tab con moi
         //tab1
         var tab1: TabLayout.Tab=binding.tabLayoutUserHome.newTab()

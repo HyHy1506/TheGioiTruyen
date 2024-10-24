@@ -5,9 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.GridLayout
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
 // TODO: Rename parameter arguments, choose names that match
@@ -17,15 +15,15 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [ComicStoriesUserFragment.newInstance] factory method to
+ * Use the [ComicStories_User_Fragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class ComicStoriesUserFragment : Fragment() {
+class ComicStories_User_Fragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var recyclerView: RecyclerView
-    private lateinit var dataList: ArrayList<CardStoryItemDataClass>
+    private lateinit var dataList: ArrayList<CardStoryItem_DataClass>
     private lateinit var titleList: Array<String>
     private lateinit var authorList: Array<String>
     private lateinit var imgUrlList: Array<Int>
@@ -82,11 +80,11 @@ class ComicStoriesUserFragment : Fragment() {
     }
     fun getData(){
         for(i in titleList.indices){
-            var dataClas= CardStoryItemDataClass(titleList[i],
+            var dataClas= CardStoryItem_DataClass(titleList[i],
                 authorList[i],imgUrlList[i],scoreList[i])
             dataList.add(dataClas)
         }
-        recyclerView.adapter= CardStoryItemAdapter(dataList)
+        recyclerView.adapter= CardStoryItem_Adapter(dataList)
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -113,7 +111,7 @@ class ComicStoriesUserFragment : Fragment() {
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            ComicStoriesUserFragment().apply {
+            ComicStories_User_Fragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

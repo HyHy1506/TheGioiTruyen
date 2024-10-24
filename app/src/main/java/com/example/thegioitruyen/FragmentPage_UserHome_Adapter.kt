@@ -5,22 +5,22 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class FragmentPageUserHomeAdapter(fragmentManager: FragmentManager,lifecycle: Lifecycle):
+class FragmentPage_UserHome_Adapter(fragmentManager: FragmentManager, lifecycle: Lifecycle):
     FragmentStateAdapter(fragmentManager,lifecycle)
 {
     override fun createFragment(position: Int): Fragment {
         return when(position){
             0 ->{
-                ComicStoriesUserFragment()
+                ComicStories_User_Fragment()
             }
             1 ->{
-                TextStoriesUserFragment()
+                TextStories_User_Fragment()
             }
             2 ->{
-                BookStoriesUserFragment()
+                BookStories_User_Fragment()
             }
             else ->{
-                SettingUserFragment()
+                Setting_User_Fragment()
             }
 
         }
