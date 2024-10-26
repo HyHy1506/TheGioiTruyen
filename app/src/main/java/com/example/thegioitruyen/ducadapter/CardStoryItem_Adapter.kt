@@ -1,4 +1,4 @@
-package com.example.thegioitruyen
+package com.example.thegioitruyen.ducadapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.thegioitruyen.CardStoryItem_DataClass
+import com.example.thegioitruyen.R
 
 
 class CardStoryItem_Adapter(private val dataList: ArrayList<CardStoryItem_DataClass>)
@@ -14,7 +16,8 @@ class CardStoryItem_Adapter(private val dataList: ArrayList<CardStoryItem_DataCl
         parent: ViewGroup,
         viewType: Int
     ): ViewHolderClass {
-        var itemView = LayoutInflater.from(parent.context).inflate(R.layout.card_story_item_layout,
+        var itemView = LayoutInflater.from(parent.context).inflate(
+            R.layout.card_story_item_layout,
             parent,false)
         return ViewHolderClass(itemView)
     }
