@@ -18,6 +18,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thegioitruyen.ducadapter.Button_Adapter
 import com.example.thegioitruyen.ducadapter.ListSearch_ArrayAdapter
+import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
+import com.example.thegioitruyen.ducdataclass.GenreDataClass
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -42,9 +44,10 @@ class ComicStories_User_Fragment : Fragment() {
 
 
     private lateinit var dataList: ArrayList<CardStoryItem_DataClass>
-    private lateinit var genreList: ArrayList<String>
+    private lateinit var genreList: ArrayList<GenreDataClass>
 
-
+    lateinit var  txt1: TextView
+    lateinit var txt2: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +72,9 @@ class ComicStories_User_Fragment : Fragment() {
         dataList = ArrayList(SampleDataStory.getDataList())
         genreList = ArrayList(SampleDataStory.getListOfGenre())
 
+         txt1=view.findViewById<TextView>(R.id.txtTestList1)
+         txt2=view.findViewById<TextView>(R.id.txtTestList2)
+
         searchAdapter = ListSearch_ArrayAdapter(view.context,R.layout.list_item_search_layout,dataList)
         listViewSearchResults.adapter=searchAdapter
         ///////////////////////
@@ -77,10 +83,12 @@ class ComicStories_User_Fragment : Fragment() {
 
         for(i in genreList.indices)
         {
-            linearLayout.addView(creatGridCardViewStory(genreList[i],inflater,container))
+            linearLayout.addView(creatGridCardViewStory(genreList[i].title,inflater,container))
 
         }
         searchView.suggestionsAdapter = null
+
+
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 searchView.clearFocus()
@@ -93,14 +101,17 @@ class ComicStories_User_Fragment : Fragment() {
                 {
                     listViewSearchResults.visibility= View.GONE
 
-                }else{
-                    listViewSearchResults.visibility= View.VISIBLE
-                    searchAdapter.filter.filter(newText)
-
                     updateListViewHeight(listViewSearchResults)
+
+                }else{
+                    //listViewSearchResults.visibility= View.VISIBLE
+                    searchAdapter.filter.filter(newText)
+                    txt1.text=newText
+                    updateListViewHeight(listViewSearchResults)
+                    searchAdapter.notifyDataSetChanged()
                 }
 
-                return true;
+                return false;
             }
 
         })
@@ -157,6 +168,7 @@ class ComicStories_User_Fragment : Fragment() {
     }
     fun updateListViewHeight(listView: ListView) {
         val adapter = listView.adapter ?: return
+        txt2.text=adapter.count.toString()
         var totalHeight = 0
         for (i in 0 until adapter.count) {
             val listItem = adapter.getView(i, null, listView)

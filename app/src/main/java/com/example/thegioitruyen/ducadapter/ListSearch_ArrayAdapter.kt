@@ -7,10 +7,8 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Filter
 import android.widget.TextView
-import androidx.annotation.ContentView
-import com.example.thegioitruyen.CardStoryItem_DataClass
-import org.w3c.dom.Text
-import java.util.zip.Inflater
+import android.widget.Toast
+import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
 import com.example.thegioitruyen.R
 
 class ListSearch_ArrayAdapter(
@@ -39,7 +37,9 @@ class ListSearch_ArrayAdapter(
         // Thiết lập dữ liệu
         title.text=item.title
         idStory.text = item.idStory.toString()
-
+        view.setOnClickListener{
+            Toast.makeText(context,"idstory: ${item.idStory.toString()} ,${item.title}  ", Toast.LENGTH_SHORT).show()
+        }
 
         return view
     }

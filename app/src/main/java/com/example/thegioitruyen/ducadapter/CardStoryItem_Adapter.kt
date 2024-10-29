@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.thegioitruyen.CardStoryItem_DataClass
+import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
 import com.example.thegioitruyen.R
 
 

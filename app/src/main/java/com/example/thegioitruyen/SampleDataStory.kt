@@ -1,8 +1,11 @@
 package com.example.thegioitruyen
 
+import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
+import com.example.thegioitruyen.ducdataclass.GenreDataClass
+
 object SampleDataStory {
     private val dataList= mutableListOf<CardStoryItem_DataClass>()
-    private val listOfgenre = mutableListOf<String>()
+    private val listOfgenre = mutableListOf<GenreDataClass>()
     fun addData(data : CardStoryItem_DataClass){
         dataList.add(data)
     }
@@ -35,14 +38,14 @@ object SampleDataStory {
             addData(item)
         }
     }
-    fun addGenre(item : String){
+    fun addGenre(item : GenreDataClass){
         listOfgenre.add(item)
     }
-    fun getListOfGenre(): List<String>{
+    fun getListOfGenre(): List<GenreDataClass>{
         return  listOfgenre
     }
     fun generateListOfGenre(){
-        var list = arrayOf(
+        var titleList = arrayOf(
             "Chiến đấu",
             "Cha cha cha",
             "Co don",
@@ -55,7 +58,18 @@ object SampleDataStory {
             "Sành ăn"
 
         )
-        listOfgenre.addAll(list)
+        var idList = arrayOf(
+            11,22,33,44,55,66,77,88,99
+
+        )
+        for(i in idList.indices){
+            var item = GenreDataClass(
+                idList[i],titleList[i]
+            )
+            addGenre(item)
+        }
+
+
 
     }
 }
