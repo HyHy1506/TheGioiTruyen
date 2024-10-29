@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewpager2.widget.ViewPager2
+import com.example.thegioitruyen.databinding.FragmentBookStoriesUserBinding
+import com.example.thegioitruyen.databinding.FragmentTextStoriesBinding
+import com.example.thegioitruyen.ducadapter.FragmentPage_BookStories_Adapter
+import com.google.android.material.tabs.TabLayout
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -17,6 +22,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class BookStories_User_Fragment : Fragment() {
+
+    private lateinit var binding: FragmentBookStoriesUserBinding
+    private lateinit var pageAdapter: FragmentPage_BookStories_Adapter
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -33,8 +41,40 @@ class BookStories_User_Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding= FragmentBookStoriesUserBinding.inflate(layoutInflater)
+        val view=binding.root
+        //---------------------------------------
+        pageAdapter= FragmentPage_BookStories_Adapter(childFragmentManager, lifecycle)
+        binding.viewPaper2BookStoriesFragment.adapter=pageAdapter
+        binding.tabLayoutBookStoriesFragment.addOnTabSelectedListener(
+            object: TabLayout.OnTabSelectedListener{
+                override fun onTabSelected(tab: TabLayout.Tab?) {
+                    if (tab != null) {
+                        binding.viewPaper2BookStoriesFragment.currentItem=tab.position
+                    }
+
+                }
+                override fun onTabUnselected(tab: TabLayout.Tab?) {
+                }
+                override fun onTabReselected(tab: TabLayout.Tab?) {
+                }
+
+
+            })
+        binding.viewPaper2BookStoriesFragment.registerOnPageChangeCallback(
+            object : ViewPager2.OnPageChangeCallback(){
+                override fun onPageSelected(position: Int) {
+                    super.onPageSelected(position)
+                    binding.tabLayoutBookStoriesFragment.selectTab(
+                        binding.tabLayoutBookStoriesFragment.getTabAt(position)
+                    )
+                }
+            }
+        )
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_book_stories_user, container, false)
+        return view
+
+
     }
 
     companion object {

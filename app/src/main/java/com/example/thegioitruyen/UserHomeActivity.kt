@@ -5,6 +5,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.example.thegioitruyen.databinding.ActivityUserHomeBinding
+import com.example.thegioitruyen.ducadapter.FragmentPage_UserHome_Adapter
 import com.google.android.material.tabs.TabLayout
 
 class UserHomeActivity : AppCompatActivity() {
@@ -17,7 +18,7 @@ class UserHomeActivity : AppCompatActivity() {
         val view = binding.root
         enableEdgeToEdge()
         setContentView(view)
-        pageAdapter = FragmentPage_UserHome_Adapter(supportFragmentManager,lifecycle)
+        pageAdapter = FragmentPage_UserHome_Adapter(supportFragmentManager, lifecycle)
         // tao tab con moi
         //tab1
         var tab1: TabLayout.Tab=binding.tabLayoutUserHome.newTab()
@@ -44,7 +45,8 @@ class UserHomeActivity : AppCompatActivity() {
         ///
         binding.viewPaper2UserHome.isUserInputEnabled=false
         binding.viewPaper2UserHome.adapter=pageAdapter
-        binding.tabLayoutUserHome.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
+        binding.tabLayoutUserHome.addOnTabSelectedListener(
+            object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 if (tab != null) {
                     binding.viewPaper2UserHome.currentItem=tab.position

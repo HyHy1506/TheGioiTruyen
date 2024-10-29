@@ -105,7 +105,9 @@ class ComicStories_User_Fragment : Fragment() {
     }
 
 
-    fun creatGridCardViewStory(genre: String, inflater:LayoutInflater,container: ViewGroup?,linearLayoutParent: LinearLayout){
+    fun creatGridCardViewStory(
+        genre: String, inflater:LayoutInflater,container: ViewGroup?,
+        linearLayoutParent: LinearLayout){
         val listCardStoriesLayout = inflater.inflate(R.layout.list_card_stories_layout,container,false)
         var gridLayout=listCardStoriesLayout.findViewById<GridLayout>(R.id.gridLayout_listCardStory)
         var txtGenre=listCardStoriesLayout.findViewById<TextView>(R.id.genre_listCardStory)
