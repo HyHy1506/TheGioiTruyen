@@ -20,9 +20,12 @@ object SampleDataStory {
         val authorList = arrayOf(
             "Tran van A", "To B", "Luong C", "Dira", "Eric", "Fuka", "Gahe", "Hios"
         )
+        val isComicList = arrayOf(
+            true,false,true,false, true,false,true,false
+        )
         val imgUrlList = arrayOf(
             R.drawable.a1, R.drawable.a2, R.drawable.a3, R.drawable.a4,
-            R.drawable.a5, R.drawable.a4, R.drawable.a5, R.drawable.a6
+            R.drawable.a5, R.drawable.a6, R.drawable.a1, R.drawable.a2
         )
         val scoreList = arrayOf(3.5f, 4f, 5f, 1f, 4.5f, 1f, 4.5f, 2f)
         val idStoriesList = arrayOf(1,2,3,4,5,6,7,8)
@@ -32,6 +35,7 @@ object SampleDataStory {
                 idStoriesList[i],
                 titleList[i],
                 authorList[i],
+                isComicList[i],
                 imgUrlList[i],
                 scoreList[i]
             )

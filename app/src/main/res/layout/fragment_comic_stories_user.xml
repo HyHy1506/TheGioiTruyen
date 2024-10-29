@@ -29,18 +29,7 @@
             android:inputType="text"
             android:layout_marginVertical="10dp"
             />
-<TextView
-    android:id="@+id/txtTestList1"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:background="@color/skin"
-    />
-        <TextView
-            android:id="@+id/txtTestList2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/green1"
-            />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -64,7 +53,7 @@
             android:layout_marginTop="60dp"
             android:id="@+id/listSearch_comicStoriesUser"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="320dp"
             android:layout_marginHorizontal="10dp"
 
             android:background="@color/white"

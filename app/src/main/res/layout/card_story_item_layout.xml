@@ -42,7 +42,7 @@
             android:layout_height="35dp"
 
 
-            android:background="@drawable/shape_card_story_item_layout"
+            android:background="@drawable/shape_red_card_story_item_layout"
             app:layout_constraintEnd_toEndOf="@+id/imgCardStoryItemLayout"
             app:layout_constraintTop_toTopOf="@id/imgCardStoryItemLayout" >
 

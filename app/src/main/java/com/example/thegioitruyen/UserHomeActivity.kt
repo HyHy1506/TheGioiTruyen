@@ -42,6 +42,7 @@ class UserHomeActivity : AppCompatActivity() {
         binding.tabLayoutUserHome.addTab(tab4)
 
         ///
+        binding.viewPaper2UserHome.isUserInputEnabled=false
         binding.viewPaper2UserHome.adapter=pageAdapter
         binding.tabLayoutUserHome.addOnTabSelectedListener(object: TabLayout.OnTabSelectedListener{
             override fun onTabSelected(tab: TabLayout.Tab?) {

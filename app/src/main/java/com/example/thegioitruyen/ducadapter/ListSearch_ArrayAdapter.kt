@@ -14,7 +14,7 @@ import com.example.thegioitruyen.R
 class ListSearch_ArrayAdapter(
     context: Context,private val resource: Int,private val dataList: List<CardStoryItem_DataClass>) :
     ArrayAdapter<CardStoryItem_DataClass>(context,resource,dataList) {
-    private var filteredDataList: List<CardStoryItem_DataClass> = dataList.toList()
+    public var filteredDataList: List<CardStoryItem_DataClass> = dataList.toList()
 
     override fun getCount(): Int {
         return filteredDataList.size

@@ -14,6 +14,9 @@ import android.widget.ListView
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.constraintlayout.widget.ConstraintLayout
+
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thegioitruyen.ducadapter.Button_Adapter
@@ -72,8 +75,7 @@ class ComicStories_User_Fragment : Fragment() {
         dataList = ArrayList(SampleDataStory.getDataList())
         genreList = ArrayList(SampleDataStory.getListOfGenre())
 
-         txt1=view.findViewById<TextView>(R.id.txtTestList1)
-         txt2=view.findViewById<TextView>(R.id.txtTestList2)
+
 
         searchAdapter = ListSearch_ArrayAdapter(view.context,R.layout.list_item_search_layout,dataList)
         listViewSearchResults.adapter=searchAdapter
@@ -83,7 +85,7 @@ class ComicStories_User_Fragment : Fragment() {
 
         for(i in genreList.indices)
         {
-            linearLayout.addView(creatGridCardViewStory(genreList[i].title,inflater,container))
+            creatGridCardViewStory(genreList[i].title,inflater,container,linearLayout)
 
         }
         searchView.suggestionsAdapter = null
@@ -101,17 +103,16 @@ class ComicStories_User_Fragment : Fragment() {
                 {
                     listViewSearchResults.visibility= View.GONE
 
-                    updateListViewHeight(listViewSearchResults)
 
                 }else{
-                    //listViewSearchResults.visibility= View.VISIBLE
+                    listViewSearchResults.visibility= View.VISIBLE
                     searchAdapter.filter.filter(newText)
-                    txt1.text=newText
+
+                    listViewSearchResults.invalidate()
                     updateListViewHeight(listViewSearchResults)
-                    searchAdapter.notifyDataSetChanged()
                 }
 
-                return false;
+                return true;
             }
 
         })
@@ -129,19 +130,20 @@ class ComicStories_User_Fragment : Fragment() {
     }
 
 
-    fun creatGridCardViewStory(genre: String, inflater:LayoutInflater,container: ViewGroup?): View{
+    fun creatGridCardViewStory(genre: String, inflater:LayoutInflater,container: ViewGroup?,linearLayoutParent: LinearLayout){
         val listCardStoriesLayout = inflater.inflate(R.layout.list_card_stories_layout,container,false)
         var gridLayout=listCardStoriesLayout.findViewById<GridLayout>(R.id.gridLayout_listCardStory)
         var txtGenre=listCardStoriesLayout.findViewById<TextView>(R.id.genre_listCardStory)
 
-        for ( i in 0..5){
-
+        for ( i in dataList.indices){
+            if(dataList[i].isComic==false)continue
             var cardView =inflater.inflate(R.layout.card_story_item_layout,container,false)
             var title=cardView.findViewById<TextView>(R.id.txtTitleCardStoryItemLayout)
             var author =cardView.findViewById<TextView>(R.id.txtAuthorCardStoryItemLayout)
             var imgURL=cardView.findViewById<ImageView>(R.id.imgCardStoryItemLayout)
             var score =cardView.findViewById<TextView>(R.id.txtRankCardStoryItemLayout)
             var idStory =cardView.findViewById<TextView>(R.id.idStory_CardStoryItem)
+            var constraintLayout =cardView.findViewById<ConstraintLayout>(R.id.constraintLayoutCardStoryLayout)
 
             title.text=dataList[i].title
             author.text=dataList[i].author
@@ -149,6 +151,16 @@ class ComicStories_User_Fragment : Fragment() {
 
             score.text= (dataList[i].score).toString()
             idStory.text=dataList[i].idStory.toString()
+            if(dataList[i].score>=4f){
+                constraintLayout.setBackgroundResource(R.drawable.shape_green_story_item_layout)
+
+            }else if(dataList[i].score>=2.5f&&dataList[i].score<4f ){
+                constraintLayout.setBackgroundResource(R.drawable.shape_yellow_card_story_item_layout)
+
+            }else{
+                constraintLayout.setBackgroundResource(R.drawable.shape_red_card_story_item_layout)
+
+            }
             cardView.setOnClickListener({
                 Toast.makeText(requireContext(),"ID: ${idStory.text}- ${title.text}", Toast.LENGTH_SHORT).show()
             })
@@ -164,11 +176,13 @@ class ComicStories_User_Fragment : Fragment() {
             gridLayout.addView(cardView)
 
         }
-        return listCardStoriesLayout
+
+        linearLayoutParent.addView(listCardStoriesLayout)
+        //return listCardStoriesLayout
     }
     fun updateListViewHeight(listView: ListView) {
         val adapter = listView.adapter ?: return
-        txt2.text=adapter.count.toString()
+
         var totalHeight = 0
         for (i in 0 until adapter.count) {
             val listItem = adapter.getView(i, null, listView)
