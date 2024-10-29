@@ -6,11 +6,6 @@
     tools:context=".ComicStories_User_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-
 
     <LinearLayout
         android:id="@+id/linearLayout_fragment_comicStoryUser"
@@ -20,15 +15,30 @@
     android:orientation="vertical"
 
         >
-        <SearchView
-            android:id="@+id/search_comicStoriesUser"
+
+        <LinearLayout
+            android:id="@+id/linearLayout_search_fragment_comicStoryUser"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:queryHint="Nhập tên truyện"
-            android:queryBackground="@color/skin"
-            android:inputType="text"
-            android:layout_marginVertical="10dp"
-            />
+            android:orientation="horizontal"
+            android:background="@drawable/image_button_search_slector"
+
+            >
+            <ImageButton
+
+                android:id="@+id/searchButton_ComicStoriesUser"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerInside"
+                android:background="@android:color/transparent"
+                android:src="@drawable/icons_search"
+                android:padding="8dp"
+                />
+        </LinearLayout>
+
+
+
+
 
         <View
             android:layout_width="match_parent"
@@ -49,16 +59,6 @@
     </LinearLayout>
 
 
-        <ListView
-            android:layout_marginTop="60dp"
-            android:id="@+id/listSearch_comicStoriesUser"
-            android:layout_width="wrap_content"
-            android:layout_height="320dp"
-            android:layout_marginHorizontal="10dp"
 
-            android:background="@color/white"
-            android:visibility="gone"
-            android:elevation="20dp"
-            />
-    </FrameLayout>
+
 </ScrollView>

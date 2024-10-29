@@ -1,6 +1,7 @@
 package com.example.thegioitruyen
 
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -41,16 +42,12 @@ class ComicStories_User_Fragment : Fragment() {
     private lateinit var recyclerViewGenreButton: RecyclerView
     private lateinit var linearLayout: LinearLayout
 
-    private lateinit var searchView: SearchView
-    private lateinit var listViewSearchResults: ListView
-    private lateinit var searchAdapter: ListSearch_ArrayAdapter
 
 
     private lateinit var dataList: ArrayList<CardStoryItem_DataClass>
     private lateinit var genreList: ArrayList<GenreDataClass>
 
-    lateinit var  txt1: TextView
-    lateinit var txt2: TextView
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,8 +64,7 @@ class ComicStories_User_Fragment : Fragment() {
     ): View? {
         val view =inflater.inflate(R.layout.fragment_comic_stories_user, container, false)
          linearLayout=view.findViewById<LinearLayout>(R.id.linearLayout_fragment_comicStoryUser)
-         searchView =view.findViewById<SearchView>(R.id.search_comicStoriesUser)
-        listViewSearchResults =view.findViewById<ListView>(R.id.listSearch_comicStoriesUser)
+
         recyclerViewGenreButton =view.findViewById<RecyclerView>(R.id.rv_buttonGenre_ComicStoriesUser)
         SampleDataStory.generateData()
         SampleDataStory.generateListOfGenre()
@@ -77,8 +73,7 @@ class ComicStories_User_Fragment : Fragment() {
 
 
 
-        searchAdapter = ListSearch_ArrayAdapter(view.context,R.layout.list_item_search_layout,dataList)
-        listViewSearchResults.adapter=searchAdapter
+
         ///////////////////////
         recyclerViewGenreButton.layoutManager= GridLayoutManager(view.context,1, GridLayoutManager.HORIZONTAL,false)
         recyclerViewGenreButton.adapter= Button_Adapter(genreList)
@@ -88,40 +83,20 @@ class ComicStories_User_Fragment : Fragment() {
             creatGridCardViewStory(genreList[i].title,inflater,container,linearLayout)
 
         }
-        searchView.suggestionsAdapter = null
 
+        var searchImgBtn=view.findViewById<ImageView>(R.id.searchButton_ComicStoriesUser)
+        var linearSearchLayout=view.findViewById<LinearLayout>(R.id.linearLayout_search_fragment_comicStoryUser)
 
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                searchView.clearFocus()
-                listViewSearchResults.visibility= View.GONE
-                return false
-            }
+        linearSearchLayout.setOnClickListener{
+            var intent = Intent(view.context,SearchActivity::class.java)
+            startActivity(intent)
 
-            override fun onQueryTextChange(newText: String?): Boolean {
-                if(newText.isNullOrEmpty())
-                {
-                    listViewSearchResults.visibility= View.GONE
-
-
-                }else{
-                    listViewSearchResults.visibility= View.VISIBLE
-                    searchAdapter.filter.filter(newText)
-
-                    listViewSearchResults.invalidate()
-                    updateListViewHeight(listViewSearchResults)
-                }
-
-                return true;
-            }
-
-        })
-        searchView.setOnCloseListener{
-            searchView.clearFocus()
-            listViewSearchResults.visibility= View.GONE
-            true
         }
-
+        searchImgBtn.setOnClickListener{
+            var intent = Intent(view.context,SearchActivity::class.java)
+            startActivity(intent)
+            linearSearchLayout.isPressed=true
+        }
         ///////////////////////
 
 //       ---------------------------------------------------------------------------------
@@ -180,23 +155,7 @@ class ComicStories_User_Fragment : Fragment() {
         linearLayoutParent.addView(listCardStoriesLayout)
         //return listCardStoriesLayout
     }
-    fun updateListViewHeight(listView: ListView) {
-        val adapter = listView.adapter ?: return
 
-        var totalHeight = 0
-        for (i in 0 until adapter.count) {
-            val listItem = adapter.getView(i, null, listView)
-            listItem.measure(
-                View.MeasureSpec.makeMeasureSpec(listView.width, View.MeasureSpec.EXACTLY),
-                View.MeasureSpec.UNSPECIFIED
-            )
-            totalHeight += listItem.measuredHeight
-        }
-        val params = listView.layoutParams
-        params.height = totalHeight + (listView.dividerHeight * (adapter.count - 1))
-        listView.layoutParams = params
-        listView.requestLayout()
-    }
     companion object {
         /**
          * Use this factory method to create a new instance of
