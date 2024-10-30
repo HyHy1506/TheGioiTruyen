@@ -1,10 +1,16 @@
-package com.example.thegioitruyen
+package com.example.thegioitruyen.ducfragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.thegioitruyen.SampleDataStory
+import com.example.thegioitruyen.databinding.FragmentLoveBookStoriesBinding
+import com.example.thegioitruyen.ducadapter.CardStoryItem_Adapter
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -21,6 +27,10 @@ class LoveBookStoriesFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private  lateinit var binding : FragmentLoveBookStoriesBinding
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -33,8 +43,18 @@ class LoveBookStoriesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        binding= FragmentLoveBookStoriesBinding.inflate(layoutInflater)
+        val view = binding.root
+
+        var cardStoryAdapter= CardStoryItem_Adapter(view.context,ArrayList(SampleDataStory.getDataList()))
+        var recyclerView: RecyclerView=binding.recyclerCardStoryLoveBookFragment
+        recyclerView.adapter=cardStoryAdapter
+        recyclerView.layoutManager= GridLayoutManager(view.context,3, LinearLayoutManager.VERTICAL,false)
+        recyclerView.setHasFixedSize(true)
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_love_book_stories, container, false)
+        return view
     }
 
     companion object {

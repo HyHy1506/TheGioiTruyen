@@ -1,4 +1,4 @@
-package com.example.thegioitruyen
+package com.example.thegioitruyen.ducfragment
 
 
 import android.content.Intent
@@ -11,17 +11,16 @@ import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
-import android.widget.ListView
-import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.thegioitruyen.R
+import com.example.thegioitruyen.SampleDataStory
+import com.example.thegioitruyen.SearchActivity
 import com.example.thegioitruyen.ducadapter.Button_Adapter
-import com.example.thegioitruyen.ducadapter.ListSearch_ArrayAdapter
 import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
 
@@ -88,12 +87,12 @@ class ComicStories_User_Fragment : Fragment() {
         var linearSearchLayout=view.findViewById<LinearLayout>(R.id.linearLayout_search_fragment_comicStoryUser)
 
         linearSearchLayout.setOnClickListener{
-            var intent = Intent(view.context,SearchActivity::class.java)
+            var intent = Intent(view.context, SearchActivity::class.java)
             startActivity(intent)
 
         }
         searchImgBtn.setOnClickListener{
-            var intent = Intent(view.context,SearchActivity::class.java)
+            var intent = Intent(view.context, SearchActivity::class.java)
             startActivity(intent)
             linearSearchLayout.isPressed=true
         }

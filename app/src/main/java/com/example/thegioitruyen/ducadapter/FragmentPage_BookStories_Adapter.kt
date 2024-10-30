@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.thegioitruyen.LoveBookStoriesFragment
-import com.example.thegioitruyen.ReadBookStoriesFragment
+import com.example.thegioitruyen.ducfragment.LoveBookStoriesFragment
+import com.example.thegioitruyen.ducfragment.ReadBookStoriesFragment
 
 class FragmentPage_BookStories_Adapter(fragmentManager: FragmentManager,lifeCycle: Lifecycle)
     : FragmentStateAdapter(fragmentManager,lifeCycle) {

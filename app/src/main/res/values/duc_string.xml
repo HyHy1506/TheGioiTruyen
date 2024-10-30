@@ -9,5 +9,6 @@
     <string name="titleTab4">Menu</string>
     <string name="titleTab1BookStories">Đã đọc</string>
     <string name="titleTab2BookStories">Yêu thích</string>
-
+    <string name="titleChapterMarkedSetting">Chương được đánh dấu</string>
+    <string name="titleCommentHistorySetting">Lịch sử bình luận</string>
 </resources>

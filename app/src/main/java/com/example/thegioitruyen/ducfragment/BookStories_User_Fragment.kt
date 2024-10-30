@@ -1,4 +1,4 @@
-package com.example.thegioitruyen
+package com.example.thegioitruyen.ducfragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.example.thegioitruyen.databinding.FragmentBookStoriesUserBinding
-import com.example.thegioitruyen.databinding.FragmentTextStoriesBinding
 import com.example.thegioitruyen.ducadapter.FragmentPage_BookStories_Adapter
 import com.google.android.material.tabs.TabLayout
 

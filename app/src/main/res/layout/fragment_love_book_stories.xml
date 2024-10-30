@@ -3,14 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoveBookStoriesFragment"
+    tools:context=".ducfragment.LoveBookStoriesFragment"
     android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
-<GridLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/green2"
-    />
+    <androidx.recyclerview.widget.RecyclerView
+        android:padding="15dp"
+        android:id="@+id/recycler_cardStory_loveBookFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        />
 
 </LinearLayout>

@@ -5,6 +5,8 @@
     <color name="green2">#1A936F</color>
     <color name="green3">#114B5F</color>
     <color name="skin">#F3E9D2</color>
+    <color name="blur">#0F000000</color>
+
     <color name="duc_red">#FF4141</color>
     <color name="duc_yellow">#FFE500</color>
 

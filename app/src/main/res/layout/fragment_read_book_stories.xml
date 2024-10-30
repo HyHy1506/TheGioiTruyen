@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReadBookStoriesFragment">
+    tools:context=".ducfragment.ReadBookStoriesFragment"
+    android:orientation="vertical"
+    >
 
     <!-- TODO: Update blank fragment layout -->
-    <GridLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/green1"
-        />
 
-</FrameLayout>
+<androidx.recyclerview.widget.RecyclerView
+    android:padding="15dp"
+    android:id="@+id/recycler_cardStory_readBookFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    />
+</LinearLayout>
