@@ -8,6 +8,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView
+        android:backgroundTint="@color/white"
         android:padding="15dp"
         android:id="@+id/recycler_cardStory_loveBookFragment"
         android:layout_width="match_parent"

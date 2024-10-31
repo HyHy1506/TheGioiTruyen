@@ -1,11 +1,13 @@
 package com.example.thegioitruyen
 
 import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
+import com.example.thegioitruyen.ducdataclass.ChapterDataClass
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
 
 object SampleDataStory {
     private val dataList= mutableListOf<CardStoryItem_DataClass>()
-    private val listOfgenre = mutableListOf<GenreDataClass>()
+    private val listOfGenre = mutableListOf<GenreDataClass>()
+    private val listOfChapter = mutableListOf<ChapterDataClass>()
     fun addData(data : CardStoryItem_DataClass){
         dataList.add(data)
     }
@@ -43,10 +45,10 @@ object SampleDataStory {
         }
     }
     fun addGenre(item : GenreDataClass){
-        listOfgenre.add(item)
+        listOfGenre.add(item)
     }
     fun getListOfGenre(): List<GenreDataClass>{
-        return  listOfgenre
+        return  listOfGenre
     }
     fun generateListOfGenre(){
         var titleList = arrayOf(
@@ -71,6 +73,45 @@ object SampleDataStory {
                 idList[i],titleList[i]
             )
             addGenre(item)
+        }
+
+
+
+    }
+    fun addChapter(item : ChapterDataClass){
+        listOfChapter.add(item)
+    }
+    fun getListOfChapter(): List<ChapterDataClass>{
+        return  listOfChapter
+    }
+    fun generateListOfChapter(){
+        var titleList = arrayOf(
+          "Chuong 1: hoho",
+            "Chuong 2: hoho",
+            "Chuong 3: hohoa",
+            "Chuong 4: hoho e ew werwer",
+            "Chuong 5: hoho sfge",
+            "Chuong 6: hohodas",
+
+        )
+        var dateCraetedList = arrayOf(
+           "01/02/2024",
+            "01/03/2024",
+            "01/04/2024",
+            "01/05/2024",
+            "01/06/2024",
+            "01/07/2024",
+
+            )
+        var idList = arrayOf(
+            11,22,33,44,55,66
+
+        )
+        for(i in idList.indices){
+            var item = ChapterDataClass(
+                idList[i],titleList[i],dateCraetedList[i]
+            )
+            addChapter(item)
         }
 
 

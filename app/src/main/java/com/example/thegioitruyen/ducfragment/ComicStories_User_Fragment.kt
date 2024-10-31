@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.thegioitruyen.R
 import com.example.thegioitruyen.SampleDataStory
 import com.example.thegioitruyen.SearchActivity
+import com.example.thegioitruyen.StoryOverviewActivity
 import com.example.thegioitruyen.ducadapter.Button_Adapter
 import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
@@ -67,6 +68,8 @@ class ComicStories_User_Fragment : Fragment() {
         recyclerViewGenreButton =view.findViewById<RecyclerView>(R.id.rv_buttonGenre_ComicStoriesUser)
         SampleDataStory.generateData()
         SampleDataStory.generateListOfGenre()
+        SampleDataStory.generateListOfChapter()
+
         dataList = ArrayList(SampleDataStory.getDataList())
         genreList = ArrayList(SampleDataStory.getListOfGenre())
 
@@ -138,7 +141,9 @@ class ComicStories_User_Fragment : Fragment() {
 
             }
             cardView.setOnClickListener({
-                Toast.makeText(requireContext(),"ID: ${idStory.text}- ${title.text}", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireContext(),"ID: ${idStory.text}- ${title.text}", Toast.LENGTH_SHORT).show()
+            var intent= Intent(context, StoryOverviewActivity::class.java)
+            startActivity(intent)
             })
             cardView.apply {
                 layoutParams = GridLayout.LayoutParams().apply {

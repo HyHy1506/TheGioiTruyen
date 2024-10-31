@@ -12,8 +12,8 @@ import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
 import com.example.thegioitruyen.R
 
 class ListSearch_ArrayAdapter(
-    context: Context,private val resource: Int,private val dataList: List<CardStoryItem_DataClass>) :
-    ArrayAdapter<CardStoryItem_DataClass>(context,resource,dataList) {
+    var appContext: Context,private val resource: Int,private val dataList: List<CardStoryItem_DataClass>) :
+    ArrayAdapter<CardStoryItem_DataClass>(appContext,resource,dataList) {
     public var filteredDataList: List<CardStoryItem_DataClass> = dataList.toList()
 
     override fun getCount(): Int {
@@ -25,7 +25,7 @@ class ListSearch_ArrayAdapter(
     }
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val inflater = LayoutInflater.from(context)
+        val inflater = LayoutInflater.from(appContext)
         val view = convertView ?: inflater.inflate(resource, parent, false)
 
         val item = filteredDataList[position]
