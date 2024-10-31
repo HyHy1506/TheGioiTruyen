@@ -24,6 +24,9 @@ class StoryOverviewActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(view)
 
+        binding.btnBackSotryOverview.setOnClickListener{
+            finish()
+        }
         for (item in SampleDataStory.getListOfChapter()) {
             // Inflate each item view
             val itemView = LayoutInflater.from(this)
