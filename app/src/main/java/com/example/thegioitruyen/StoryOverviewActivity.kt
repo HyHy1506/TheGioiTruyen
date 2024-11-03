@@ -1,5 +1,6 @@
 package com.example.thegioitruyen
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.LinearLayout
@@ -41,7 +42,8 @@ class StoryOverviewActivity : AppCompatActivity() {
             idChapterTextView.text = item.idChapter.toString()
             dateCreatedTextView.text = item.dateCreated.toString()
             btn.setOnClickListener{
-                Toast.makeText(this,"id : ${item.title}", Toast.LENGTH_SHORT).show()
+                var intent= Intent(this, ChapterActivity::class.java)
+                startActivity(intent)
             }
             // Add itemView to the container
             binding.lineaerlistChapterStoryOverview.addView(itemView)

@@ -13,6 +13,7 @@
     <string name="titleCommentHistorySetting">Lịch sử bình luận</string>
     <string name="buttonLoveStoryOverview">Yêu thích</string>
     <string name="buttonReadFromChapter1StoryOverview">Đọc từ chương 1</string>
-
+    <string name="previousChapter">Chương trước</string>
+    <string name="nextChapter">Chương sau</string>
 
 </resources>

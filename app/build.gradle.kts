@@ -48,5 +48,6 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation (libs.flexbox)
-
+    implementation (libs.touchimageview)
+    implementation (libs.photoview)
 }
