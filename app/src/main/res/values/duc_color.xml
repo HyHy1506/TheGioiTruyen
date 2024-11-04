@@ -9,5 +9,6 @@
 
     <color name="duc_red">#FF4141</color>
     <color name="duc_yellow">#FFE500</color>
+    <color name="duc_opacity20">#27000000</color>
 
 </resources>

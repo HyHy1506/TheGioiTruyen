@@ -15,5 +15,6 @@
     <string name="buttonReadFromChapter1StoryOverview">Đọc từ chương 1</string>
     <string name="previousChapter">Chương trước</string>
     <string name="nextChapter">Chương sau</string>
+    <string name="comment">Bình luận</string>
 
 </resources>
