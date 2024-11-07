@@ -22,6 +22,7 @@ import com.example.thegioitruyen.databinding.FragmentTextStoriesBinding
 import com.example.thegioitruyen.ducadapter.Button_Adapter
 import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
+import com.example.thegioitruyen.ducutils.dpToPx
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -143,7 +144,7 @@ class TextStories_User_Fragment : Fragment() {
 
                     columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f) // layout_columnWeight="1"
                     setGravity(Gravity.CENTER)
-                    setMargins(16, 16, 16, 16)
+                    setMargins(0,0,0,10.dpToPx())
                 }
             }
             txtGenre.text=genre

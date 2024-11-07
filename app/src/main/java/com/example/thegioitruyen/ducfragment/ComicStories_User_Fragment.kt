@@ -2,7 +2,9 @@ package com.example.thegioitruyen.ducfragment
 
 
 import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
+import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Gravity
@@ -24,6 +26,7 @@ import com.example.thegioitruyen.StoryOverviewActivity
 import com.example.thegioitruyen.ducadapter.Button_Adapter
 import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
+import com.example.thegioitruyen.ducutils.dpToPx
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -82,7 +85,7 @@ class ComicStories_User_Fragment : Fragment() {
 
         for(i in genreList.indices)
         {
-            creatGridCardViewStory(genreList[i].title,inflater,container,linearLayout)
+           creatGridCardViewStory(genreList[i].title,inflater,container,linearLayout)
 
         }
 
@@ -148,11 +151,14 @@ class ComicStories_User_Fragment : Fragment() {
             cardView.apply {
                 layoutParams = GridLayout.LayoutParams().apply {
 
+
                     columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f) // layout_columnWeight="1"
                     setGravity(Gravity.CENTER)
-                    setMargins(16, 16, 16, 16)
+                    setMargins(0,0,0, 10.dpToPx() )
+
                 }
             }
+
             txtGenre.text=genre
             gridLayout.addView(cardView)
 
