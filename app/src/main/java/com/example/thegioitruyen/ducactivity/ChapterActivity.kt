@@ -1,15 +1,12 @@
-package com.example.thegioitruyen
+package com.example.thegioitruyen.ducactivity
 
-import android.app.Activity
-import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.animation.AnimationUtils
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
-import androidx.fragment.app.Fragment
+import com.example.thegioitruyen.R
 import com.example.thegioitruyen.databinding.ActivityChapterBinding
 import com.example.thegioitruyen.ducutils.hideKeyboard
 import com.example.thegioitruyen.ducutils.scrollToBottom
@@ -29,6 +26,7 @@ class ChapterActivity : AppCompatActivity() {
         binding= ActivityChapterBinding.inflate(layoutInflater)
         val view = binding.root
         enableEdgeToEdge()
+        setContentView(view)
 
         var scrollView=binding.scrollParagraphChapter
         var frameTop=binding.frameTopChapter
@@ -40,7 +38,7 @@ class ChapterActivity : AppCompatActivity() {
 
 
 
-        setContentView(view)
+
 
     }
 
@@ -82,13 +80,13 @@ class ChapterActivity : AppCompatActivity() {
             if(scrollY>oldScrollY){
                 if(isTopFrameVisible)
                 {
-                    frameTop.startAnimation(AnimationUtils.loadAnimation(this,R.anim.slide_up))
+                    frameTop.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_up))
                     frameTop.visibility= View.GONE
                     isTopFrameVisible=false
                 }
                 if(isBottomFrameVisible)
                 {
-                    frameBottom.startAnimation(AnimationUtils.loadAnimation(this,R.anim.slide_down))
+                    frameBottom.startAnimation(AnimationUtils.loadAnimation(this, R.anim.slide_down))
                     frameBottom.visibility= View.GONE
                     isBottomFrameVisible=false
                 }

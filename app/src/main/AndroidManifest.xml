@@ -13,22 +13,25 @@
         android:theme="@style/Theme.TheGioiTruyen"
         tools:targetApi="31">
         <activity
-            android:name=".ResultSearchActivity"
+            android:name=".ducactivity.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ChapterActivity"
+            android:name=".ducactivity.ResultSearchActivity"
             android:exported="false" />
         <activity
-            android:name=".StoryOverviewActivity"
+            android:name=".ducactivity.ChapterActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchActivity"
+            android:name=".ducactivity.StoryOverviewActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ducactivity.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".UserHomeActivity"
+            android:name=".ducactivity.UserHomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,9 +2,7 @@ package com.example.thegioitruyen.ducfragment
 
 
 import android.content.Intent
-import android.content.res.Resources
 import android.os.Bundle
-import android.util.TypedValue
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.Gravity
@@ -14,15 +12,14 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thegioitruyen.R
 import com.example.thegioitruyen.SampleDataStory
-import com.example.thegioitruyen.SearchActivity
-import com.example.thegioitruyen.StoryOverviewActivity
+import com.example.thegioitruyen.ducactivity.SearchActivity
+import com.example.thegioitruyen.ducactivity.StoryOverviewActivity
 import com.example.thegioitruyen.ducadapter.Button_Adapter
 import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
 import com.example.thegioitruyen.ducdataclass.GenreDataClass

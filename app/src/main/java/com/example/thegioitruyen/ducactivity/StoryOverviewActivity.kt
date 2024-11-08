@@ -1,19 +1,15 @@
-package com.example.thegioitruyen
+package com.example.thegioitruyen.ducactivity
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import com.example.thegioitruyen.R
+import com.example.thegioitruyen.SampleDataStory
 import com.example.thegioitruyen.databinding.ActivityStoryOverviewBinding
-import com.example.thegioitruyen.databinding.ActivityUserHomeBinding
-import com.example.thegioitruyen.ducadapter.ListChapter_ArrayAdapter
-import java.util.zip.Inflater
 
 class StoryOverviewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoryOverviewBinding

@@ -1,9 +1,10 @@
-package com.example.thegioitruyen
+package com.example.thegioitruyen.ducactivity
 
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
+import com.example.thegioitruyen.R
 import com.example.thegioitruyen.databinding.ActivityUserHomeBinding
 import com.example.thegioitruyen.ducadapter.FragmentPage_UserHome_Adapter
 import com.google.android.material.tabs.TabLayout

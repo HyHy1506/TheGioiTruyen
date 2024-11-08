@@ -74,7 +74,18 @@
             android:layout_marginHorizontal="30dp"
 
             />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogout_settingUserFragment"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@drawable/image_button_search_slector"
+            android:text="@string/logout"
+            android:drawableLeft="@drawable/icon_logout_24"
 
+            android:paddingStart="20dp"
+            android:drawablePadding="20dp"
+            android:gravity="start|center_vertical"
+            />
 
     </LinearLayout>
 </ScrollView>

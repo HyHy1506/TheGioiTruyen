@@ -1,11 +1,14 @@
 package com.example.thegioitruyen.ducfragment
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.thegioitruyen.R
+import com.example.thegioitruyen.databinding.FragmentSettingUserBinding
+import com.example.thegioitruyen.ducactivity.LoginActivity
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,6 +21,8 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class Setting_User_Fragment : Fragment() {
+
+    private lateinit var binding: FragmentSettingUserBinding
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -34,8 +39,17 @@ class Setting_User_Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding= FragmentSettingUserBinding.inflate(layoutInflater)
+        val view =binding.root
+        binding.btnLogoutSettingUserFragment.setOnClickListener{
+            var intent= Intent(view.context, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
+
+        return view
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting_user, container, false)
+        //return inflater.inflate(R.layout.fragment_setting_user, container, false)
     }
 
     companion object {
