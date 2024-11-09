@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:queryHint="Nhập tên truyện"
-        android:queryBackground="@color/white"
+        android:queryBackground="@android:color/transparent"
         android:iconifiedByDefault="false"
         android:inputType="text"
         />
@@ -24,8 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="10dp"
 
-        android:background="@color/white"
+        android:background="@android:color/transparent"
         android:visibility="gone"
-        android:elevation="20dp"
         />
 </LinearLayout>

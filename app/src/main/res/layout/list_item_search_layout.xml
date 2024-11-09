@@ -16,7 +16,7 @@
             android:id="@+id/txtTile_listItemLayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/white"
+            android:background="@android:color/transparent"
             android:text="hellohe"
             android:gravity="center_vertical"
             android:paddingHorizontal="20dp"

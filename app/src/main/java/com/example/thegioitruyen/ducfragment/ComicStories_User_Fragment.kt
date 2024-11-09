@@ -66,9 +66,7 @@ class ComicStories_User_Fragment : Fragment() {
          linearLayout=view.findViewById<LinearLayout>(R.id.linearLayout_fragment_comicStoryUser)
 
         recyclerViewGenreButton =view.findViewById<RecyclerView>(R.id.rv_buttonGenre_ComicStoriesUser)
-        SampleDataStory.generateData()
-        SampleDataStory.generateListOfGenre()
-        SampleDataStory.generateListOfChapter()
+
 
         dataList = ArrayList(SampleDataStory.getDataList())
         genreList = ArrayList(SampleDataStory.getListOfGenre())

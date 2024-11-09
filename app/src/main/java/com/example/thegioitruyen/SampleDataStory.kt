@@ -12,9 +12,11 @@ object SampleDataStory {
         dataList.add(data)
     }
     fun getDataList(): List<CardStoryItem_DataClass>{
+        dataList.clear()
+        generateData()
         return dataList
     }
-    fun generateData(){
+    private fun generateData(){
         val titleList = arrayOf(
             "Cau chuyen", "Xua kia", "Muon Thua Khac Ghi Nao", "Ai oi3",
             "Ai oi1", "Ai oi3", "Ai oi1", "Ai oi2"
@@ -48,9 +50,11 @@ object SampleDataStory {
         listOfGenre.add(item)
     }
     fun getListOfGenre(): List<GenreDataClass>{
+        listOfGenre.clear()
+        generateListOfGenre()
         return  listOfGenre
     }
-    fun generateListOfGenre(){
+    private fun generateListOfGenre(){
         var titleList = arrayOf(
             "Chiến đấu",
             "Cha cha cha",
@@ -82,9 +86,12 @@ object SampleDataStory {
         listOfChapter.add(item)
     }
     fun getListOfChapter(): List<ChapterDataClass>{
+        listOfChapter.clear()
+        generateListOfChapter()
         return  listOfChapter
     }
-    fun generateListOfChapter(){
+    private fun generateListOfChapter(){
+
         var titleList = arrayOf(
           "Chuong 1: hoho",
             "Chuong 2: hoho",
