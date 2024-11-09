@@ -26,4 +26,7 @@
     <string name="forgotPassword">Quên mật khẩu</string>
     <string name="orLoginWith">Hoặc đăng nhập với</string>
     <string name="dontHaveAnAcctount">Không có tài khoản ?</string>
+    <string name="createYourAccout">Tạo tài khoản của bạn</string>
+    <string name="confirmPassword">Xác nhận mật khẩu</string>
+    <string name="email">Email</string>
 </resources>

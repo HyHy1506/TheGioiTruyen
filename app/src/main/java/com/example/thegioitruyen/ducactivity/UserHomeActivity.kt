@@ -3,6 +3,7 @@ package com.example.thegioitruyen.ducactivity
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.viewpager2.widget.ViewPager2
 import com.example.thegioitruyen.R
 import com.example.thegioitruyen.databinding.ActivityUserHomeBinding
@@ -18,6 +19,8 @@ class UserHomeActivity : AppCompatActivity() {
         binding= ActivityUserHomeBinding.inflate(layoutInflater)
         val view = binding.root
         enableEdgeToEdge()
+        // turn off darkmode
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
         setContentView(view)
         pageAdapter = FragmentPage_UserHome_Adapter(supportFragmentManager, lifecycle)
         // tao tab con moi

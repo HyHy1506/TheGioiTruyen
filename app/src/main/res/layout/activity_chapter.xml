@@ -748,16 +748,16 @@
                     android:layout_marginStart="20dp"
                     android:layout_marginEnd="50dp"
                     android:background="@drawable/shape_rectangle_curved"
-                    android:backgroundTint="@color/skin"
+                    android:backgroundTint="@color/white"
                     android:textSize="18sp"
                     android:paddingHorizontal="10dp"
                     />
 
                 <ImageButton
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
                     android:layout_gravity="center_vertical|right"
-                    android:layout_marginEnd="5dp"
+                    android:layout_marginEnd="10dp"
                     android:background="@drawable/image_button_search_slector"
                     android:scaleType="centerCrop"
                     android:src="@drawable/icon_send_light" />

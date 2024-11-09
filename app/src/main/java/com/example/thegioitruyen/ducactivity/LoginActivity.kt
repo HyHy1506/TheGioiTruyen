@@ -1,5 +1,6 @@
 package com.example.thegioitruyen.ducactivity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,11 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(view)
 
+
+        bindinng.btnSignUpLogin.setOnClickListener{
+            var intent= Intent(this, SignUpActivity::class.java)
+            startActivity(intent)
+        }
 
 
 
