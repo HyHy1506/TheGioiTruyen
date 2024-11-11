@@ -1,6 +1,7 @@
 package com.example.thegioitruyen.ducadapter
 
 import android.content.Context
+import android.content.Intent
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -10,9 +11,12 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import com.example.thegioitruyen.R
+import com.example.thegioitruyen.ducactivity.StoryOverviewActivity
+import com.example.thegioitruyen.ducutils.changeShapeBackgroundColorByScore
 import com.example.thegioitruyen.ducutils.dpToPx
 
 
@@ -46,11 +50,16 @@ class CardStoryItem_Adapter(var context: Context, private val dataList: ArrayLis
         holder.imgURL.setImageResource(currentItem.imgURL)
 
         holder.score.text= (currentItem.score).toString()
-        holder.constraintLayout.setBackgroundResource(R.drawable.shape_yellow_card_story_item_layout)
-        setColorScore(currentItem.score,holder)
+        holder.constraintLayout.changeShapeBackgroundColorByScore(currentItem.score)
+//        holder.constraintLayout.setBackgroundResource(R.drawable.shape_yellow_card_story_item_layout)
+//        setColorScore(currentItem.score,holder)
         holder.idStory.text=currentItem.idStory.toString()
         holder.itemView.setOnClickListener{
-            Toast.makeText(context,"id: ${currentItem.idStory},${currentItem.title}", Toast.LENGTH_SHORT).show()
+
+            var intent= Intent(context, StoryOverviewActivity::class.java)
+            intent.putExtra(context.resources.getString( R.string.key_storyInfo),currentItem)
+            context.startActivity(intent)
+            //Toast.makeText(context,"id: ${currentItem.idStory},${currentItem.title}", Toast.LENGTH_SHORT).show()
         }
     }
 
