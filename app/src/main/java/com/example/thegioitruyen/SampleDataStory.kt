@@ -1,17 +1,17 @@
 package com.example.thegioitruyen
 
-import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
+import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import com.example.thegioitruyen.ducdataclass.ChapterDataClass
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
 
 object SampleDataStory {
-    private val dataList= mutableListOf<CardStoryItem_DataClass>()
+    private val dataList= mutableListOf<StoryDataClass>()
     private val listOfGenre = mutableListOf<GenreDataClass>()
     private val listOfChapter = mutableListOf<ChapterDataClass>()
-    fun addData(data : CardStoryItem_DataClass){
+    fun addData(data : StoryDataClass){
         dataList.add(data)
     }
-    fun getDataList(): List<CardStoryItem_DataClass>{
+    fun getDataList(): List<StoryDataClass>{
         dataList.clear()
         generateData()
         return dataList
@@ -24,10 +24,24 @@ object SampleDataStory {
         val authorList = arrayOf(
             "Tran van A", "To B", "Luong C", "Dira", "Eric", "Fuka", "Gahe", "Hios"
         )
+        val dateList = arrayOf(
+            "11/10/2024", "11/10/2024", "11/10/2024", "11/10/2024", "11/10/2024",
+            "11/10/2024", "11/10/2024", "11/10/2024"
+        )
+        val desList = arrayOf(
+            "sieu vaty ngo", "tai nang dang cap", "tim hieu qua da con trong nhu",
+            "Dira dbay gio con ", "Eric nhac tgre song dong", "Fuka boi vi tinh",
+            "vui khong hoi Gahe", "vi sa Hios trong mo"
+        )
         val isComicList = arrayOf(
             true,false,true,false, true,false,true,false
         )
         val imgUrlList = arrayOf(
+            R.drawable.a5, R.drawable.a6, R.drawable.a1, R.drawable.a2,
+            R.drawable.a1, R.drawable.a2, R.drawable.a3, R.drawable.a4
+
+        )
+        val bgImgUrlList = arrayOf(
             R.drawable.a1, R.drawable.a2, R.drawable.a3, R.drawable.a4,
             R.drawable.a5, R.drawable.a6, R.drawable.a1, R.drawable.a2
         )
@@ -35,13 +49,16 @@ object SampleDataStory {
         val idStoriesList = arrayOf(1,2,3,4,5,6,7,8)
 
         for(i in titleList.indices){
-            val item = CardStoryItem_DataClass(
+            val item = StoryDataClass(
                 idStoriesList[i],
                 titleList[i],
                 authorList[i],
-                isComicList[i],
+                desList[i],
                 imgUrlList[i],
-                scoreList[i]
+                bgImgUrlList[i],
+                dateList[i],
+                scoreList[i],
+                isComicList[i]
             )
             addData(item)
         }

@@ -12,8 +12,12 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
-
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thegioitruyen.R
@@ -21,9 +25,12 @@ import com.example.thegioitruyen.SampleDataStory
 import com.example.thegioitruyen.ducactivity.SearchActivity
 import com.example.thegioitruyen.ducactivity.StoryOverviewActivity
 import com.example.thegioitruyen.ducadapter.Button_Adapter
-import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
+import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
+import com.example.thegioitruyen.ducutils.changeBackgroundColorByScore
 import com.example.thegioitruyen.ducutils.dpToPx
+import com.example.thegioitruyen.ducviewmodel.GenreViewModel
+import com.example.thegioitruyen.ducviewmodel.StoryViewModel
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,11 +51,9 @@ class ComicStories_User_Fragment : Fragment() {
 
 
 
-    private lateinit var dataList: ArrayList<CardStoryItem_DataClass>
-    private lateinit var genreList: ArrayList<GenreDataClass>
 
-
-
+     val storiesViewModel: StoryViewModel by viewModels()
+    val genreViewModel: GenreViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -68,21 +73,13 @@ class ComicStories_User_Fragment : Fragment() {
         recyclerViewGenreButton =view.findViewById<RecyclerView>(R.id.rv_buttonGenre_ComicStoriesUser)
 
 
-        dataList = ArrayList(SampleDataStory.getDataList())
-        genreList = ArrayList(SampleDataStory.getListOfGenre())
-
-
 
 
         ///////////////////////
         recyclerViewGenreButton.layoutManager= GridLayoutManager(view.context,1, GridLayoutManager.HORIZONTAL,false)
-        recyclerViewGenreButton.adapter= Button_Adapter(genreList)
+        recyclerViewGenreButton.adapter= Button_Adapter(ArrayList( genreViewModel.genres.value))
 
-        for(i in genreList.indices)
-        {
-           creatGridCardViewStory(genreList[i].title,inflater,container,linearLayout)
 
-        }
 
         var searchImgBtn=view.findViewById<ImageView>(R.id.searchButton_ComicStoriesUser)
         var linearSearchLayout=view.findViewById<LinearLayout>(R.id.linearLayout_search_fragment_comicStoryUser)
@@ -97,6 +94,20 @@ class ComicStories_User_Fragment : Fragment() {
             startActivity(intent)
             linearSearchLayout.isPressed=true
         }
+
+        storiesViewModel.stories.observe(viewLifecycleOwner, Observer { stories ->
+            Toast.makeText(context,"${stories[1].title}}", Toast.LENGTH_SHORT).show()
+        })
+        genreViewModel.genres.observe(viewLifecycleOwner, Observer{genres->
+
+
+            for(i in genres.indices)
+            {
+                creatGridCardViewStory(genres[i],inflater,container,linearLayout)
+
+            }
+
+        })
         ///////////////////////
 
 //       ---------------------------------------------------------------------------------
@@ -106,14 +117,13 @@ class ComicStories_User_Fragment : Fragment() {
 
 
     fun creatGridCardViewStory(
-        genre: String, inflater:LayoutInflater,container: ViewGroup?,
+        genre: GenreDataClass, inflater:LayoutInflater,container: ViewGroup?,
         linearLayoutParent: LinearLayout){
         val listCardStoriesLayout = inflater.inflate(R.layout.list_card_stories_layout,container,false)
         var gridLayout=listCardStoriesLayout.findViewById<GridLayout>(R.id.gridLayout_listCardStory)
         var txtGenre=listCardStoriesLayout.findViewById<TextView>(R.id.genre_listCardStory)
 
-        for ( i in dataList.indices){
-            if(dataList[i].isComic==false)continue
+        for(i in storiesViewModel.getComicStoriesByGenre(null)){
             var cardView =inflater.inflate(R.layout.card_story_item_layout,container,false)
             var title=cardView.findViewById<TextView>(R.id.txtTitleCardStoryItemLayout)
             var author =cardView.findViewById<TextView>(R.id.txtAuthorCardStoryItemLayout)
@@ -121,32 +131,20 @@ class ComicStories_User_Fragment : Fragment() {
             var score =cardView.findViewById<TextView>(R.id.txtRankCardStoryItemLayout)
             var idStory =cardView.findViewById<TextView>(R.id.idStory_CardStoryItem)
             var constraintLayout =cardView.findViewById<ConstraintLayout>(R.id.constraintLayoutCardStoryLayout)
+            title.text=i.title
+            author.text=i.author
+            imgURL.setImageResource(i.imgURL)
 
-            title.text=dataList[i].title
-            author.text=dataList[i].author
-            imgURL.setImageResource(dataList[i].imgURL)
-
-            score.text= (dataList[i].score).toString()
-            idStory.text=dataList[i].idStory.toString()
-            if(dataList[i].score>=4f){
-                constraintLayout.setBackgroundResource(R.drawable.shape_green_story_item_layout)
-
-            }else if(dataList[i].score>=2.5f&&dataList[i].score<4f ){
-                constraintLayout.setBackgroundResource(R.drawable.shape_yellow_card_story_item_layout)
-
-            }else{
-                constraintLayout.setBackgroundResource(R.drawable.shape_red_card_story_item_layout)
-
-            }
+            score.text= (i.score).toString()
+            idStory.text=i.idStory.toString()
+            constraintLayout.changeBackgroundColorByScore(i.score)
             cardView.setOnClickListener({
 //                Toast.makeText(requireContext(),"ID: ${idStory.text}- ${title.text}", Toast.LENGTH_SHORT).show()
-            var intent= Intent(context, StoryOverviewActivity::class.java)
-            startActivity(intent)
+                var intent= Intent(context, StoryOverviewActivity::class.java)
+                startActivity(intent)
             })
             cardView.apply {
                 layoutParams = GridLayout.LayoutParams().apply {
-
-
                     columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f) // layout_columnWeight="1"
                     setGravity(Gravity.CENTER)
                     setMargins(0,0,0, 10.dpToPx() )
@@ -154,10 +152,11 @@ class ComicStories_User_Fragment : Fragment() {
                 }
             }
 
-            txtGenre.text=genre
+            txtGenre.text=genre.title
             gridLayout.addView(cardView)
 
         }
+
 
         linearLayoutParent.addView(listCardStoriesLayout)
         //return listCardStoriesLayout

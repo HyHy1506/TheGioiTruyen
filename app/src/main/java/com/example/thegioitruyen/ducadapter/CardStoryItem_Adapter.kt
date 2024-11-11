@@ -11,12 +11,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
-import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
+import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import com.example.thegioitruyen.R
 import com.example.thegioitruyen.ducutils.dpToPx
 
 
-class CardStoryItem_Adapter(var context: Context, private val dataList: ArrayList<CardStoryItem_DataClass>)
+class CardStoryItem_Adapter(var context: Context, private val dataList: ArrayList<StoryDataClass>)
     : RecyclerView.Adapter<CardStoryItem_Adapter.ViewHolderClass>(){
     override fun onCreateViewHolder(
         parent: ViewGroup,

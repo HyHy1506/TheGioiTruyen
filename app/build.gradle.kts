@@ -5,14 +5,14 @@ plugins {
 
 android {
     namespace = "com.example.thegioitruyen"
-    compileSdk = 34
+    compileSdk = 35
     buildFeatures {
         viewBinding = true
     }
     defaultConfig {
         applicationId = "com.example.thegioitruyen"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -50,4 +50,6 @@ dependencies {
     implementation (libs.flexbox)
     implementation (libs.touchimageview)
     implementation (libs.photoview)
+    implementation(libs.androidx.core.ktx.v1150)
+    implementation(libs.androidx.fragment.ktx)
 }

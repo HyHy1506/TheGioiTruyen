@@ -11,14 +11,14 @@ import com.example.thegioitruyen.R
 import com.example.thegioitruyen.SampleDataStory
 import com.example.thegioitruyen.databinding.ActivitySearchBinding
 import com.example.thegioitruyen.ducadapter.ListSearch_ArrayAdapter
-import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
+import com.example.thegioitruyen.ducdataclass.StoryDataClass
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
     private lateinit var searchView: SearchView
     private lateinit var listViewSearchResults: ListView
     private lateinit var searchAdapter: ListSearch_ArrayAdapter
-    private lateinit var dataList: ArrayList<CardStoryItem_DataClass>
+    private lateinit var dataList: ArrayList<StoryDataClass>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

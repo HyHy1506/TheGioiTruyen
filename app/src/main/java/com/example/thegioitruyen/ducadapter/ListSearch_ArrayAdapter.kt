@@ -8,19 +8,19 @@ import android.widget.ArrayAdapter
 import android.widget.Filter
 import android.widget.TextView
 import android.widget.Toast
-import com.example.thegioitruyen.ducdataclass.CardStoryItem_DataClass
+import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import com.example.thegioitruyen.R
 
 class ListSearch_ArrayAdapter(
-    var appContext: Context,private val resource: Int,private val dataList: List<CardStoryItem_DataClass>) :
-    ArrayAdapter<CardStoryItem_DataClass>(appContext,resource,dataList) {
-    public var filteredDataList: List<CardStoryItem_DataClass> = dataList.toList()
+    var appContext: Context,private val resource: Int,private val dataList: List<StoryDataClass>) :
+    ArrayAdapter<StoryDataClass>(appContext,resource,dataList) {
+    public var filteredDataList: List<StoryDataClass> = dataList.toList()
 
     override fun getCount(): Int {
         return filteredDataList.size
     }
 
-    override fun getItem(position: Int): CardStoryItem_DataClass? {
+    override fun getItem(position: Int): StoryDataClass? {
         return filteredDataList[position]
     }
 
@@ -64,7 +64,7 @@ class ListSearch_ArrayAdapter(
             }
 
             override fun publishResults(constraint: CharSequence?, results: FilterResults?) {
-                filteredDataList = results?.values as List<CardStoryItem_DataClass>? ?: listOf()
+                filteredDataList = results?.values as List<StoryDataClass>? ?: listOf()
                 notifyDataSetChanged()
             }
         }
