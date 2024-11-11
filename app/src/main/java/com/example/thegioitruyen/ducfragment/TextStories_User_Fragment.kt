@@ -11,20 +11,18 @@ import android.widget.GridLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.thegioitruyen.R
-import com.example.thegioitruyen.SampleDataStory
 import com.example.thegioitruyen.ducactivity.SearchActivity
 import com.example.thegioitruyen.databinding.FragmentTextStoriesBinding
+import com.example.thegioitruyen.ducactivity.StoryOverviewActivity
 import com.example.thegioitruyen.ducadapter.Button_Adapter
-import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
-import com.example.thegioitruyen.ducutils.changeBackgroundColorByScore
+import com.example.thegioitruyen.ducutils.changeShapeBackgroundColorByScore
 import com.example.thegioitruyen.ducutils.dpToPx
 import com.example.thegioitruyen.ducviewmodel.GenreViewModel
 import com.example.thegioitruyen.ducviewmodel.StoryViewModel
@@ -133,9 +131,13 @@ class TextStories_User_Fragment : Fragment() {
 
             score.text= (i.score).toString()
             idStory.text=i.idStory.toString()
-           constraintLayout.changeBackgroundColorByScore(i.score)
+           constraintLayout.changeShapeBackgroundColorByScore(i.score)
             cardView.setOnClickListener({
-                Toast.makeText(requireContext(),"ID: ${idStory.text}- ${title.text}", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(requireContext(),"ID: ${idStory.text}- ${title.text}", Toast.LENGTH_SHORT).show()
+                var intent= Intent(context, StoryOverviewActivity::class.java)
+                intent.putExtra(resources.getString( R.string.key_storyInfo),i)
+                startActivity(intent)
+
             })
             cardView.apply {
                 layoutParams = GridLayout.LayoutParams().apply {

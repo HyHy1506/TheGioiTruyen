@@ -48,6 +48,7 @@
             android:background="@android:color/transparent">
 
             <ImageView
+                android:id="@+id/imgBackgroundStory_storyOverview"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
@@ -78,6 +79,8 @@
                 </androidx.cardview.widget.CardView>
 
                 <TextView
+                    android:id="@+id/txtScoreStory_storyOverview"
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end|bottom"
@@ -95,6 +98,8 @@
         </FrameLayout>
 
         <TextView
+            android:id="@+id/txtTitleStory_storyOverview"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -103,6 +108,8 @@
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/txtAuthorStory_storyOverview"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -185,7 +192,19 @@
             android:text="@string/buttonReadFromChapter1StoryOverview"
             android:background="@drawable/shape_button_secondary"
             />
+<TextView
+    android:id="@+id/txtDescriptionStory_storyOverview"
+    android:textSize="17sp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="30dp"
+    android:layout_gravity="center_horizontal"
+    android:maxLines="20"
+    android:ellipsize="end"
+    android:text="Lorem ipsum odor amet, consectetuer adipiscing elit. Leo vehicula maecenas potenti ad praesent. Elit ante cubilia fames ipsum hendrerit. Neque felis porttitor potenti himenaeos lorem ornare, sem taciti? Rutrum inceptos duis facilisi mattis porttitor ipsum euismod sit. Per adipiscing fermentum diam maximus aliquet torquent.
 
+Nostra blandit feugiat condimentum mattis, fringilla adipiscing. Nullam eros elit efficitur nunc netus! Velit ullamcorper potenti accumsan libero dis elit. Congue massa mattis egestas feugiat finibus finibus et congue vulputate. Imperdiet cursus euismod id non posuere egestas lectus. Ullamcorper vitae maecenas enim dictumst dictum metus turpis vivamus felis. Congue nunc nibh inceptos tempor augue aptent pharetra inceptos. Ornare velit platea nostra rhoncus pellentesque tincidunt consequat dis duis."
+    />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

@@ -1,16 +1,13 @@
 package com.example.thegioitruyen.ducutils
 
 
-import android.app.Activity
 import android.content.res.Resources
-import android.util.TypedValue
 import android.view.View
-import android.widget.Button
 import android.widget.ScrollView
 import android.content.Context
+import android.graphics.PorterDuff
+import android.os.Build
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageButton
-import androidx.fragment.app.Fragment
 import com.example.thegioitruyen.R
 
 fun Int.dpToPx(): Int {
@@ -26,7 +23,7 @@ fun View.hideKeyboard(context: Context) {
     val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(windowToken, 0)
 }
-fun View.changeBackgroundColorByScore(score:Float){
+fun View.changeShapeBackgroundColorByScore(score:Float){
     if(score>=4f){
         this.setBackgroundResource(R.drawable.shape_green_story_item_layout)
 
@@ -38,3 +35,15 @@ fun View.changeBackgroundColorByScore(score:Float){
 
     }
 }
+fun View.changeBackgroundTintColorByScore(score:Float){
+    var drawable = background
+    val color = when{
+        score>=4f -> R.color.green2
+        score>=2.5f -> R.color.duc_yellow
+        else -> R.color.duc_red
+    }
+    val colorFilter=context.getColor(color)
+
+    drawable.setColorFilter(colorFilter, PorterDuff.Mode.SRC_ATOP)
+}
+

@@ -5,15 +5,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import com.example.thegioitruyen.R
 import com.example.thegioitruyen.SampleDataStory
 import com.example.thegioitruyen.databinding.ActivityStoryOverviewBinding
+import com.example.thegioitruyen.ducdataclass.StoryDataClass
+import com.example.thegioitruyen.ducutils.changeBackgroundTintColorByScore
 
 class StoryOverviewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoryOverviewBinding
-
+    private lateinit var storyInfo: StoryDataClass
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityStoryOverviewBinding.inflate(layoutInflater)
@@ -21,9 +24,25 @@ class StoryOverviewActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(view)
 
-        binding.btnBackSotryOverview.setOnClickListener{
-            finish()
-        }
+
+
+       loadInfoStory()
+        generateChapter()
+        setButton()
+    }
+    fun loadInfoStory(){
+        storyInfo=intent.getSerializableExtra(resources.getString(R.string.key_storyInfo)) as StoryDataClass
+
+        binding.txtTitleStoryStoryOverview.text=storyInfo.title
+        binding.txtAuthorStoryStoryOverview.text=storyInfo.author
+        binding.txtDescriptionStoryStoryOverview.text=storyInfo.description
+        binding.imgStoryStoryOverview.setImageResource(storyInfo.imgURL)
+        binding.imgBackgroundStoryStoryOverview.setImageResource(storyInfo.backgroundImageURL)
+        binding.txtScoreStoryStoryOverview.text=storyInfo.score.toString()
+        binding.txtScoreStoryStoryOverview.changeBackgroundTintColorByScore(storyInfo.score)
+
+    }
+    fun generateChapter(){
         for (item in SampleDataStory.getListOfChapter()) {
             // Inflate each item view
             val itemView = LayoutInflater.from(this)
@@ -43,6 +62,11 @@ class StoryOverviewActivity : AppCompatActivity() {
             }
             // Add itemView to the container
             binding.lineaerlistChapterStoryOverview.addView(itemView)
+        }
+    }
+    fun setButton(){
+        binding.btnBackSotryOverview.setOnClickListener{
+            finish()
         }
     }
 }
