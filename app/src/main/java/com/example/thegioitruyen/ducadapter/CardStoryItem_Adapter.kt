@@ -18,6 +18,7 @@ import com.example.thegioitruyen.R
 import com.example.thegioitruyen.ducactivity.StoryOverviewActivity
 import com.example.thegioitruyen.ducutils.changeShapeBackgroundColorByScore
 import com.example.thegioitruyen.ducutils.dpToPx
+import com.example.thegioitruyen.ducutils.toActivity
 
 
 class CardStoryItem_Adapter(var context: Context, private val dataList: ArrayList<StoryDataClass>)
@@ -56,10 +57,9 @@ class CardStoryItem_Adapter(var context: Context, private val dataList: ArrayLis
         holder.idStory.text=currentItem.idStory.toString()
         holder.itemView.setOnClickListener{
 
-            var intent= Intent(context, StoryOverviewActivity::class.java)
-            intent.putExtra(context.resources.getString( R.string.key_storyInfo),currentItem)
-            context.startActivity(intent)
-            //Toast.makeText(context,"id: ${currentItem.idStory},${currentItem.title}", Toast.LENGTH_SHORT).show()
+
+            // truyen mot dataclass den activity moi
+            context.toActivity(StoryOverviewActivity::class.java, R.string.key_storyInfo,currentItem)
         }
     }
 

@@ -1,14 +1,20 @@
 package com.example.thegioitruyen.ducutils
 
 
+import android.app.Activity
 import android.content.res.Resources
 import android.view.View
 import android.widget.ScrollView
 import android.content.Context
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Build
+import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.app.AppCompatActivity
 import com.example.thegioitruyen.R
+import com.example.thegioitruyen.ducactivity.StoryOverviewActivity
+import java.io.Serializable
 
 fun Int.dpToPx(): Int {
     return (this * Resources.getSystem().displayMetrics.density).toInt()
@@ -46,4 +52,13 @@ fun View.changeBackgroundTintColorByScore(score:Float){
 
     drawable.setColorFilter(colorFilter, PorterDuff.Mode.SRC_ATOP)
 }
-
+fun Context.toActivity(activityClass: Class<out Activity>, key: Int, value: Serializable){
+    var intent= Intent(this, activityClass)
+    intent.putExtra(this.resources.getString(key),value)
+    this.startActivity(intent)
+}
+fun Context.toActivity(activityClass: Class<out Activity>, key: Int, value: Bundle){
+    var intent= Intent(this, activityClass)
+    intent.putExtra(this.resources.getString(key),value)
+    this.startActivity(intent)
+}

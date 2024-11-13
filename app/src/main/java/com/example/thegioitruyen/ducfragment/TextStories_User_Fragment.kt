@@ -24,6 +24,7 @@ import com.example.thegioitruyen.ducadapter.Button_Adapter
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
 import com.example.thegioitruyen.ducutils.changeShapeBackgroundColorByScore
 import com.example.thegioitruyen.ducutils.dpToPx
+import com.example.thegioitruyen.ducutils.toActivity
 import com.example.thegioitruyen.ducviewmodel.GenreViewModel
 import com.example.thegioitruyen.ducviewmodel.StoryViewModel
 import kotlin.getValue
@@ -79,7 +80,7 @@ class TextStories_User_Fragment : Fragment() {
 
         ///////////////////////
         recyclerViewGenreButton.layoutManager= GridLayoutManager(view.context,1, GridLayoutManager.HORIZONTAL,false)
-        recyclerViewGenreButton.adapter= Button_Adapter(ArrayList( genreViewModel.genres.value))
+        recyclerViewGenreButton.adapter= Button_Adapter(requireContext(),ArrayList( genreViewModel.genres.value),false)
         genreViewModel.genres.observe(viewLifecycleOwner, Observer {genres->
             for(i in genres )
             {
@@ -134,9 +135,10 @@ class TextStories_User_Fragment : Fragment() {
            constraintLayout.changeShapeBackgroundColorByScore(i.score)
             cardView.setOnClickListener({
                 //Toast.makeText(requireContext(),"ID: ${idStory.text}- ${title.text}", Toast.LENGTH_SHORT).show()
-                var intent= Intent(context, StoryOverviewActivity::class.java)
-                intent.putExtra(resources.getString( R.string.key_storyInfo),i)
-                startActivity(intent)
+                // truyen mot dataclass den activity moi
+                requireContext().toActivity(StoryOverviewActivity::class.java, R.string.key_storyInfo,i)
+
+
 
             })
             cardView.apply {
