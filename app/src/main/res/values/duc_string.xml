@@ -37,4 +37,9 @@
     <string name="key_storiesByGenre">STORIES_BY_GENRE</string>
     <string name="key_isComic">IS_COMIC</string>
     <string name="key_genreInfo">GENRE_INFO</string>
+    <string name="key_chapterInfo">CHAPTER_INFO</string>
+    <string name="key_previousChapterInfo">PREVIOUS_CHAPTER_INFO</string>
+    <string name="key_nextChapterInfo">NEXT_CHAPTER_INFO</string>
+    <string name="key_mainChapterInfo">MAIN_CHAPTER_INFO</string>
+
 </resources>

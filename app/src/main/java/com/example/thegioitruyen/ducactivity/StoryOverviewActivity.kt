@@ -12,8 +12,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.thegioitruyen.R
 import com.example.thegioitruyen.SampleDataStory
 import com.example.thegioitruyen.databinding.ActivityStoryOverviewBinding
+import com.example.thegioitruyen.ducdataclass.ChapterDataClass
 import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import com.example.thegioitruyen.ducutils.changeBackgroundTintColorByScore
+import com.example.thegioitruyen.ducutils.getKey_chapterInfo
+import com.example.thegioitruyen.ducutils.getKey_mainChapter
+import com.example.thegioitruyen.ducutils.getKey_nextChapter
+import com.example.thegioitruyen.ducutils.getKey_previousChapter
+import com.example.thegioitruyen.ducutils.toActivity
 import com.example.thegioitruyen.ducviewmodel.ChapterViewModel
 
 class StoryOverviewActivity : AppCompatActivity() {
@@ -69,13 +75,31 @@ class StoryOverviewActivity : AppCompatActivity() {
             idChapterTextView.text = item.idChapter.toString()
             dateCreatedTextView.text = item.dateCreated.toString()
             btn.setOnClickListener{
-                var intent= Intent(this, ChapterActivity::class.java)
-                startActivity(intent)
+                // tao key de chuyen cac chuong truoc, sau ,hien tai cho chapter activity
+               toChapterActivity(item)
+
             }
             // Add itemView to the container
             binding.lineaerlistChapterStoryOverview.addView(itemView)
         }
     }
+
+    private fun toChapterActivity(chapter: ChapterDataClass) {
+        var key= getKey_chapterInfo(this)
+
+        var key_mainChapter= getKey_mainChapter(this)
+        var key_nextChapter= getKey_nextChapter(this)
+        var key_previousChapter= getKey_previousChapter(this)
+        var bundle= Bundle()
+        bundle.putSerializable(key_mainChapter,chapter)
+        bundle.putSerializable(key_nextChapter,
+            chapterViewModel.getNextChapterByCurrentChapter(chapter))
+        bundle.putSerializable(key_previousChapter,
+            chapterViewModel.getPreviousChapterByCurrentChapter(chapter))
+
+        this.toActivity(ChapterActivity::class.java,key,bundle)
+    }
+
     fun setButtonWithOutData(){
         binding.btnBackSotryOverview.setOnClickListener{
             finish()

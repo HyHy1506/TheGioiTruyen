@@ -11,11 +11,14 @@ import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.thegioitruyen.R
 import com.example.thegioitruyen.ducactivity.StoryOverviewActivity
 import java.io.Serializable
+//-------------------------------------
 
+//--------------------------------------
 fun Int.dpToPx(): Int {
     return (this * Resources.getSystem().displayMetrics.density).toInt()
 }
@@ -52,13 +55,41 @@ fun View.changeBackgroundTintColorByScore(score:Float){
 
     drawable.setColorFilter(colorFilter, PorterDuff.Mode.SRC_ATOP)
 }
-fun Context.toActivity(activityClass: Class<out Activity>, key: Int, value: Serializable){
+fun Context.toActivity(activityClass: Class<out Activity>, key: Int, value: Serializable?){
     var intent= Intent(this, activityClass)
     intent.putExtra(this.resources.getString(key),value)
     this.startActivity(intent)
 }
-fun Context.toActivity(activityClass: Class<out Activity>, key: Int, value: Bundle){
+fun Context.toActivity(activityClass: Class<out Activity>, key: Int, value: Bundle?){
     var intent= Intent(this, activityClass)
     intent.putExtra(this.resources.getString(key),value)
     this.startActivity(intent)
+}
+fun Context.toActivity(activityClass: Class<out Activity>, key: String, value: Serializable?){
+    var intent= Intent(this, activityClass)
+    intent.putExtra(key,value)
+    this.startActivity(intent)
+}
+fun Context.toActivity(activityClass: Class<out Activity>, key: String, value: Bundle?){
+    var intent= Intent(this, activityClass)
+    intent.putExtra(key,value)
+    this.startActivity(intent)
+}
+fun showTestToast(context: Context){
+    Toast.makeText(context,"oke", Toast.LENGTH_SHORT).show()
+}
+fun showTestToast(context: Context,text:String){
+    Toast.makeText(context,text, Toast.LENGTH_SHORT).show()
+}
+fun getKey_mainChapter(context: Context):String{
+    return context.resources.getString(R.string.key_mainChapterInfo)
+}
+fun getKey_nextChapter(context: Context):String{
+    return context.resources.getString(R.string.key_nextChapterInfo)
+}
+fun getKey_previousChapter(context: Context):String{
+    return context.resources.getString(R.string.key_previousChapterInfo)
+}
+fun getKey_chapterInfo(context: Context):String{
+    return context.resources.getString(R.string.key_chapterInfo)
 }

@@ -10,8 +10,26 @@ class ChapterViewModel : ViewModel() {
     fun getAllChaptersByStory(story: StoryDataClass): List<ChapterDataClass> {
         return SampleDataStory.getListOfChapter()
     }
-    fun getOneChapter(story: StoryDataClass,chapterID:Int): ChapterDataClass{
-        return SampleDataStory.getListOfChapter().get(0)
+    fun getOneChapter(story: StoryDataClass,idxChapter:Int): ChapterDataClass{
+        return SampleDataStory.getListOfChapter().get(idxChapter)
 
+    }
+    fun getNextChapterByCurrentChapter(currentChapter: ChapterDataClass): ChapterDataClass?{
+        var idxCurrentChapter = SampleDataStory.getListOfChapter().indexOf(currentChapter)
+        if(SampleDataStory.getListOfChapter().size>idxCurrentChapter+1)
+        {
+            return SampleDataStory.getListOfChapter().get(idxCurrentChapter+1)
+        }else{
+            return null
+        }
+    }
+    fun getPreviousChapterByCurrentChapter(currentChapter: ChapterDataClass): ChapterDataClass?{
+        var idxCurrentChapter = SampleDataStory.getListOfChapter().indexOf(currentChapter)
+        if(0<=idxCurrentChapter-1)
+        {
+            return SampleDataStory.getListOfChapter().get(idxCurrentChapter-1)
+        }else{
+            return null
+        }
     }
 }

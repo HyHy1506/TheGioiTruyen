@@ -128,7 +128,7 @@ object SampleDataStory {
 
             )
         var idList = arrayOf(
-            11,22,33,44,55,66
+           1,2,3,4,5,6
 
         )
         for(i in idList.indices){
