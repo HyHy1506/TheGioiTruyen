@@ -49,7 +49,7 @@ class StoryOverviewActivity : AppCompatActivity() {
         return intent.hasExtra(key)
     }
     fun loadInfoStory(key: String){
-        storyInfo=intent.getSerializableExtra(key) as StoryDataClass
+        storyInfo=intent.getParcelableExtra<StoryDataClass>(key) as StoryDataClass
         binding.txtTitleStoryStoryOverview.text=storyInfo.title
         binding.txtAuthorStoryStoryOverview.text=storyInfo.author
         binding.txtDescriptionStoryStoryOverview.text=storyInfo.description
@@ -91,10 +91,10 @@ class StoryOverviewActivity : AppCompatActivity() {
         var key_nextChapter= getKey_nextChapter(this)
         var key_previousChapter= getKey_previousChapter(this)
         var bundle= Bundle()
-        bundle.putSerializable(key_mainChapter,chapter)
-        bundle.putSerializable(key_nextChapter,
+        bundle.putParcelable(key_mainChapter,chapter)
+        bundle.putParcelable(key_nextChapter,
             chapterViewModel.getNextChapterByCurrentChapter(chapter))
-        bundle.putSerializable(key_previousChapter,
+        bundle.putParcelable(key_previousChapter,
             chapterViewModel.getPreviousChapterByCurrentChapter(chapter))
 
         this.toActivity(ChapterActivity::class.java,key,bundle)

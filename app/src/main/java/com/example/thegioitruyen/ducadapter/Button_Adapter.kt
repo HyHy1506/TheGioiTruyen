@@ -39,7 +39,7 @@ class Button_Adapter(var context: Context,private val dataList: ArrayList<GenreD
             var keyGenreInfo=context.resources.getString(R.string.key_genreInfo)
             var bundle= Bundle()
             bundle.putBoolean(keyIsComic,isComic)
-            bundle.putSerializable(keyGenreInfo,dataList[position])
+            bundle.putParcelable(keyGenreInfo,dataList[position])
 
             context.toActivity(StoriesByGenreActivity::class.java,R.string.key_storiesByGenre,bundle)
 //            var intent= Intent(context, StoriesByGenreActivity::class.java)

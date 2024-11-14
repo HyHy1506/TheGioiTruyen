@@ -21,6 +21,7 @@
         android:id="@+id/recyclerStories_resultSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
         >
 
     </androidx.recyclerview.widget.RecyclerView>
