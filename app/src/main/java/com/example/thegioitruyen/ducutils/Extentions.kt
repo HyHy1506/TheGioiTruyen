@@ -11,22 +11,49 @@ import android.graphics.PorterDuff
 import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
+import android.view.Gravity
+import android.view.LayoutInflater
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.GridLayout
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.thegioitruyen.R
+import com.example.thegioitruyen.databinding.CardStoryItemLayoutBinding
+import com.example.thegioitruyen.databinding.ListCardStoriesLayoutBinding
 import com.example.thegioitruyen.ducactivity.StoryOverviewActivity
+import com.example.thegioitruyen.ducdataclass.GenreDataClass
+import com.example.thegioitruyen.ducdataclass.ParagraphDataClass
+import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import java.io.Serializable
 //-------------------------------------
-var loremIpsum="Lorem ipsum odor amet, consectetuer adipiscing elit. Acurae conubia habitasse feugiat urna vestibulum dis. Faucibus ultricies leo fusce accumsan suscipit sapien penatibus. Nulla per ad curae erat dolor; eu nisi? Iaculis turpis efficitur ad nascetur quisque commodo justo pharetra. Finibus ultrices gravida condimentum laoreet magna eget. Phasellus inceptos fames nisl nibh nisl rhoncus. Sagittis conubia ornare leo fermentum dapibus mus. Dictum facilisis faucibus curabitur purus nec proin. Torquent dui fringilla class pretium odio tellus at! Turpis ornare gravida metus amet, molestie augue eget. Non ornare vehicula potenti mollis gravida duis nostra. Aliquet tortor semper consectetur enim faucibus tempus, turpis arcu penatibus."
+
+
+fun getDataNotFound(context: Context): String {
+    return context.getString(R.string.dataNotFound)
+}
+fun getLoremIpsum(context: Context): String = context.getString(R.string.loremIpsum)
+fun getLoremIpsumLong(context: Context): String = context.getString(R.string.loremIpsumLong)
+fun getKeyStoryInfo(context: Context): String = context.getString(R.string.key_storyInfo)
+fun getKeyStoriesByGenre(context: Context): String = context.getString(R.string.key_storiesByGenre)
+fun getKeyIsComic(context: Context): String = context.getString(R.string.key_isComic)
+fun getKeyGenreInfo(context: Context): String = context.getString(R.string.key_genreInfo)
+fun getKeyChapterInfo(context: Context): String = context.getString(R.string.key_chapterInfo)
+fun getKeyPreviousChapterInfo(context: Context): String = context.getString(R.string.key_previousChapterInfo)
+fun getKeyNextChapterInfo(context: Context): String = context.getString(R.string.key_nextChapterInfo)
+fun getKeyMainChapterInfo(context: Context): String = context.getString(R.string.key_mainChapterInfo)
+fun getKeyResultSearchInfo(context: Context): String = context.getString(R.string.key_resultSearchInfo)
+fun getKeyTextQuery(context: Context): String = context.getString(R.string.key_textQuery)
 
 //--------------------------------------
-fun getLoremIpsum(context: Context): String{
-    return context.resources.getString(R.string.loremIpsum)
-}
+
 fun getTextDataNotFound(context: Context): String{
     return context.resources.getString(R.string.dataNotFound)
 }
+
+
+
 fun Int.dpToPx(): Int {
     return (this * Resources.getSystem().displayMetrics.density).toInt()
 }
@@ -113,4 +140,98 @@ fun getKey_previousChapter(context: Context):String{
 }
 fun getKey_chapterInfo(context: Context):String{
     return context.resources.getString(R.string.key_chapterInfo)
+}
+fun createGridCardViewStory(
+    context: Context,
+     inflater:LayoutInflater,
+    viewGroup: ViewGroup ,genre: GenreDataClass,
+    dataList: List<StoryDataClass> ){
+    var blistCardStoriesLayout= ListCardStoriesLayoutBinding.inflate(inflater)
+    val listCardStoriesLayout = blistCardStoriesLayout.root
+    var gridLayout=blistCardStoriesLayout.gridLayoutListCardStory
+    var txtGenre=blistCardStoriesLayout.genreListCardStory
+//        val listCardStoriesLayout = inflater.inflate(R.layout.list_card_stories_layout,container,false)
+//        var gridLayout=listCardStoriesLayout.findViewById<GridLayout>(R.id.gridLayout_listCardStory)
+//        var txtGenre=listCardStoriesLayout.findViewById<TextView>(R.id.genre_listCardStory)
+    for(i in dataList){
+        var bCardView= CardStoryItemLayoutBinding.inflate(inflater)
+        var cardView =bCardView.root
+        var title=bCardView.txtTitleCardStoryItemLayout
+        var author =bCardView.txtAuthorCardStoryItemLayout
+        var imgURL=bCardView.imgCardStoryItemLayout
+        var score =bCardView.txtRankCardStoryItemLayout
+        var idStory =bCardView.idStoryCardStoryItem
+        var constraintLayout =bCardView.constraintLayoutCardStoryLayout
+        title.text=i.title
+        author.text=i.author
+        imgURL.setImageResource(i.imgURL)
+
+        score.text= (i.score).toString()
+        idStory.text=i.idStory.toString()
+        constraintLayout.changeShapeBackgroundColorByScore(i.score)
+        cardView.setOnClickListener({
+            // truyen mot dataclass den activity moi
+            context.toActivity(StoryOverviewActivity::class.java, context.getString(R.string.key_storyInfo),i)
+
+            //   .toActivity(StoryOverviewActivity::class.java, R.string.key_storyInfo,i)
+        })
+        cardView.apply {
+            layoutParams = GridLayout.LayoutParams().apply {
+                columnSpec = GridLayout.spec(GridLayout.UNDEFINED, 1f) // layout_columnWeight="1"
+                setGravity(Gravity.CENTER)
+                setMargins(0,0,0, 10.dpToPx() )
+
+            }
+        }
+
+        txtGenre.text=genre.title
+        gridLayout.addView(cardView)
+
+    }
+
+
+    viewGroup.addView(listCardStoriesLayout)
+    //return listCardStoriesLayout
+}
+fun getExampleGenre(context: Context): GenreDataClass{
+    var title= context.getString(R.string.dataNotFound)
+    return GenreDataClass(1, title)
+}
+fun getExampleComicParagraph(context: Context): ParagraphDataClass{
+    return ParagraphDataClass(
+        1
+        ,R.drawable.pa1
+        , context.getString(R.string.loremIpsum),
+        1,1,true)
+}
+fun getExampleTextParagraph(context: Context): ParagraphDataClass{
+    return ParagraphDataClass(
+        1
+        ,R.drawable.pa1
+        , context.getString(R.string.loremIpsum),
+        1,1,false)
+}
+fun getExampleComicStory(context: Context): StoryDataClass{
+    return StoryDataClass(1,
+       context.getString(R.string.dataNotFound),
+       context.getString(R.string.dataNotFound),
+        context.getString(R.string.loremIpsum),
+        R.drawable.a1,
+        R.drawable.a2,
+        context.getString(R.string.loremIpsum),
+        4f,
+        true
+        )
+}
+fun getExampleTextStory(context: Context): StoryDataClass{
+    return StoryDataClass(1,
+        context.getString(R.string.dataNotFound),
+       context.getString(R.string.dataNotFound),
+        context.getString(R.string.loremIpsum),
+        R.drawable.a1,
+        R.drawable.a2,
+     context.getString(R.string.loremIpsum),
+        4f,
+        false
+    )
 }

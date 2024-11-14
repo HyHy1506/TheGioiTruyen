@@ -13,7 +13,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
 import com.example.thegioitruyen.R
-import com.example.thegioitruyen.SampleDataStory
 import com.example.thegioitruyen.databinding.ActivityChapterBinding
 import com.example.thegioitruyen.ducdataclass.ChapterDataClass
 import com.example.thegioitruyen.ducdataclass.StoryDataClass
@@ -24,7 +23,7 @@ import com.example.thegioitruyen.ducutils.getKey_nextChapter
 import com.example.thegioitruyen.ducutils.getKey_previousChapter
 import com.example.thegioitruyen.ducutils.getTextDataNotFound
 import com.example.thegioitruyen.ducutils.hideKeyboard
-import com.example.thegioitruyen.ducutils.loremIpsum
+import com.example.thegioitruyen.ducutils.getLoremIpsumLong
 import com.example.thegioitruyen.ducutils.scrollToBottom
 import com.example.thegioitruyen.ducutils.showTestToast
 import com.example.thegioitruyen.ducutils.showTestToastLong
@@ -92,7 +91,7 @@ class ChapterActivity : AppCompatActivity() {
         linearContainer.removeAllViews()
         binding.scrollParagraphChapter.scrollTo(0, 0)
 
-        var paragraphsList = paragraphViewModel.getAllParagraphsByChapter(mainChapter)
+        var paragraphsList = paragraphViewModel.getAllParagraphsByChapter(this,mainChapter)
         if (paragraphsList.isEmpty()) {
             return
         }
@@ -135,7 +134,7 @@ class ChapterActivity : AppCompatActivity() {
                 ViewGroup.LayoutParams.WRAP_CONTENT
             )
             textSize = 20f
-            text = (textContent ?: loremIpsum)
+            text = (textContent ?: getLoremIpsumLong(context))
             setPadding(20.dpToPx(), 20.dpToPx(), 20.dpToPx(), 20.dpToPx())
         }
         return textView

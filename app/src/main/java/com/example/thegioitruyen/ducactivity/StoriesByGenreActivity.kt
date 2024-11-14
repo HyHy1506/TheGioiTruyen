@@ -12,11 +12,18 @@ import com.example.thegioitruyen.R
 import com.example.thegioitruyen.databinding.ActivityStoriesByGenreBinding
 import com.example.thegioitruyen.ducadapter.CardStoryItem_Adapter
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
+import com.example.thegioitruyen.ducutils.getDataNotFound
+import com.example.thegioitruyen.ducutils.getExampleGenre
+import com.example.thegioitruyen.ducutils.getKeyGenreInfo
+import com.example.thegioitruyen.ducutils.getKeyIsComic
+import com.example.thegioitruyen.ducutils.getKeyStoriesByGenre
+import com.example.thegioitruyen.ducutils.getTextDataNotFound
 import com.example.thegioitruyen.ducviewmodel.StoryViewModel
 
 class StoriesByGenreActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoriesByGenreBinding
     private val storyViewModel : StoryViewModel by viewModels()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityStoriesByGenreBinding.inflate(layoutInflater)
@@ -26,12 +33,12 @@ class StoriesByGenreActivity : AppCompatActivity() {
         setButtonWithOutData()
         //----------------------
 
-        var keyData=resources.getString(R.string.key_storiesByGenre)
+        var keyData= getKeyStoriesByGenre(this)
         if(checkLoadData(keyData)){
             loadData(keyData)
 
         }else{
-            Toast.makeText(this,resources.getString(R.string.dataNotFound), Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getDataNotFound(this), Toast.LENGTH_LONG).show()
         }
 
     }
@@ -39,16 +46,17 @@ class StoriesByGenreActivity : AppCompatActivity() {
     private fun loadData(key: String) {
         var bundle= intent.getBundleExtra(key)
         if(bundle is Bundle){
-            var isComic =bundle.getBoolean(resources.getString(R.string.key_isComic))
-            var genreInfo =bundle.getSerializable(
-                resources.getString(R.string.key_genreInfo)
-            ) as GenreDataClass
-            binding.txtTitleGenreStoriesByGenre.text=genreInfo.title
-            setCardStories(isComic,genreInfo)
+            var isComic =bundle.getBoolean(getKeyIsComic(this))
+            var genreInfo: GenreDataClass? = bundle.getParcelable(
+                getKeyGenreInfo(this)
+            )
+            binding.txtTitleGenreStoriesByGenre.text=genreInfo?.title ?: getTextDataNotFound(this)
+            setCardStories(isComic,genreInfo?: getExampleGenre(this))
         }
     }
 
     fun checkLoadData(key: String): Boolean{
+
         return intent.hasExtra(key)
     }
     private fun setCardStories(isComic: Boolean,genre: GenreDataClass) {

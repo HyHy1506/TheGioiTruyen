@@ -10,11 +10,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.thegioitruyen.R
-import com.example.thegioitruyen.SampleDataStory
 import com.example.thegioitruyen.databinding.ActivityStoryOverviewBinding
 import com.example.thegioitruyen.ducdataclass.ChapterDataClass
 import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import com.example.thegioitruyen.ducutils.changeBackgroundTintColorByScore
+import com.example.thegioitruyen.ducutils.getKeyStoryInfo
 import com.example.thegioitruyen.ducutils.getKey_chapterInfo
 import com.example.thegioitruyen.ducutils.getKey_mainChapter
 import com.example.thegioitruyen.ducutils.getKey_nextChapter
@@ -34,7 +34,7 @@ class StoryOverviewActivity : AppCompatActivity() {
         setContentView(view)
         setButtonWithOutData()
         //-------------
-        var key=resources.getString(R.string.key_storyInfo)
+        var key= getKeyStoryInfo(this)
 
         if(checkloadInfoStory(key)){
             loadInfoStory(key)

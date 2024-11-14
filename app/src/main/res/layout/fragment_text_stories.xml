@@ -15,26 +15,16 @@
 
         >
 
-        <LinearLayout
-            android:id="@+id/linearLayout_search_fragment_textStoryUser"
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/searchButton_textStoriesUser"
+            android:paddingStart="15dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:layout_height="50dp"
+            android:drawableLeft="@drawable/icon_search"
             android:background="@drawable/image_button_search_slector"
-
-            >
-            <ImageButton
-
-                android:id="@+id/searchButton_textStoriesUser"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="centerInside"
-                android:background="@android:color/transparent"
-                android:src="@drawable/icons_search"
-                android:padding="8dp"
-                />
-        </LinearLayout>
-
+            android:drawablePadding="8dp"
+            />
 
 
 

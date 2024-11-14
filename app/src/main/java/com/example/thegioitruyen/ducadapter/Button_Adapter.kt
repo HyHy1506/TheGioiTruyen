@@ -14,6 +14,7 @@ import com.example.thegioitruyen.R
 import com.example.thegioitruyen.ducactivity.StoriesByGenreActivity
 import com.example.thegioitruyen.ducactivity.StoryOverviewActivity
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
+import com.example.thegioitruyen.ducutils.showTestToast
 import com.example.thegioitruyen.ducutils.toActivity
 
 class Button_Adapter(var context: Context,private val dataList: ArrayList<GenreDataClass>,private var isComic: Boolean=true) :
@@ -40,7 +41,6 @@ class Button_Adapter(var context: Context,private val dataList: ArrayList<GenreD
             var bundle= Bundle()
             bundle.putBoolean(keyIsComic,isComic)
             bundle.putParcelable(keyGenreInfo,dataList[position])
-
             context.toActivity(StoriesByGenreActivity::class.java,R.string.key_storiesByGenre,bundle)
 //            var intent= Intent(context, StoriesByGenreActivity::class.java)
 //

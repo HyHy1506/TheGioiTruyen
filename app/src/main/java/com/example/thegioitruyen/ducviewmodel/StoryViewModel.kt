@@ -22,4 +22,17 @@ class StoryViewModel: ViewModel() {
         var comicStoryList= SampleDataStory.getDataList().filter { it.isComic==false }
         return comicStoryList
     }
+    fun getTextStories( ): List<StoryDataClass>{
+        var comicStoryList= SampleDataStory.getDataList().filter { it.isComic==false }
+        return comicStoryList
+    }
+    fun getComicStories( ): List<StoryDataClass>{
+        var comicStoryList= SampleDataStory.getDataList().filter { it.isComic==true }
+        return comicStoryList
+    }
+    fun getStoriesByQuery(query: String,isComic: Boolean): List<StoryDataClass>{
+        var comicStoryList= SampleDataStory.getDataList().filter { it.isComic==isComic }
+            .filter { it.title.lowercase().contains(query.lowercase(),true) }
+        return comicStoryList
+    }
 }

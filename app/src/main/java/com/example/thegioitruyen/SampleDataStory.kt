@@ -1,10 +1,11 @@
 package com.example.thegioitruyen
 
+import android.content.Context
 import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import com.example.thegioitruyen.ducdataclass.ChapterDataClass
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
 import com.example.thegioitruyen.ducdataclass.ParagraphDataClass
-import com.example.thegioitruyen.ducutils.loremIpsum
+import com.example.thegioitruyen.ducutils.getLoremIpsumLong
 import com.example.thegioitruyen.ducviewmodel.ParagraphViewModel
 
 object SampleDataStory {
@@ -163,26 +164,26 @@ object SampleDataStory {
     fun getOneComicParagraph(): ParagraphDataClass{
        return ParagraphDataClass(3,R.drawable.pa1, null,1,2)
     }
-    fun getOneTextParagraph(): ParagraphDataClass{
-        return ParagraphDataClass(1,null, loremIpsum,1,1,false)
+    fun getOneTextParagraph(context:Context): ParagraphDataClass{
+        return ParagraphDataClass(1,null, getLoremIpsumLong(context),1,1,false)
     }
-    fun getListOfParagraph(): List<ParagraphDataClass>{
+    fun getListOfParagraph(context: Context): List<ParagraphDataClass>{
         listOfParagraph.clear()
-        generateListOfParagraph()
+        generateListOfParagraph(context)
         return  listOfParagraph
     }
-    private fun generateListOfParagraph(){
+    private fun generateListOfParagraph(context: Context){
 
-            var item1 = ParagraphDataClass(1,null, loremIpsum,1,1,false)
-        var item2 = ParagraphDataClass(2,null, loremIpsum,2,1,false)
+            var item1 = ParagraphDataClass(1,null, getLoremIpsumLong(context),1,1,false)
+        var item2 = ParagraphDataClass(2,null, getLoremIpsumLong(context),2,1,false)
         var item3 = ParagraphDataClass(3,R.drawable.pa1, null,1,2)
         var item4 = ParagraphDataClass(4,R.drawable.pa2, null,2,2)
-        var item5 = ParagraphDataClass(5,null, loremIpsum,1,3,false)
-        var item6 = ParagraphDataClass(6,null, loremIpsum,2,3,false)
+        var item5 = ParagraphDataClass(5,null, getLoremIpsumLong(context),1,3,false)
+        var item6 = ParagraphDataClass(6,null, getLoremIpsumLong(context),2,3,false)
         var item7 = ParagraphDataClass(7,R.drawable.pa3, null,1,4)
         var item8 = ParagraphDataClass(8,R.drawable.pa4, null,2,4)
-        var item9 = ParagraphDataClass(9,null, loremIpsum,1,5,false)
-        var item10 = ParagraphDataClass(10,null, loremIpsum,2,5,false)
+        var item9 = ParagraphDataClass(9,null, getLoremIpsumLong(context),1,5,false)
+        var item10 = ParagraphDataClass(10,null, getLoremIpsumLong(context),2,5,false)
         var item11 = ParagraphDataClass(11,R.drawable.pa1, null,1,6)
         var item12 = ParagraphDataClass(12,R.drawable.pa2, null,2,6)
 
