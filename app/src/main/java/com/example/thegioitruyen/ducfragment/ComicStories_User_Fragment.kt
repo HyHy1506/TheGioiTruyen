@@ -55,12 +55,13 @@ class ComicStories_User_Fragment : Fragment() {
     private var isComic = true
 
 
-    private val storyViewModel: StoryViewModel by viewModels{
+    private val storyViewModel: StoryViewModel by viewModels {
         StoryViewModelFactory(requireContext())
     }
-    val genreViewModel: GenreViewModel by viewModels{
+    val genreViewModel: GenreViewModel by viewModels {
         GenreViewModelFactory(requireContext())
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -74,12 +75,11 @@ class ComicStories_User_Fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         binding = FragmentComicStoriesUserBinding.inflate(layoutInflater)
         val view = binding.root
         linearLayout = binding.linearLayoutFragmentComicStoryUser
-
         recyclerViewGenreButton = binding.rvButtonGenreComicStoriesUser
-
 
         ///////////////////////
         recyclerViewGenreButton.layoutManager = GridLayoutManager(
@@ -90,30 +90,23 @@ class ComicStories_User_Fragment : Fragment() {
             requireContext(), ArrayList(genreViewModel.getAllGenres()), isComic
         )
 
-
         var searchImgBtn = binding.searchButtonComicStoriesUser
-
 
         searchImgBtn.setOnClickListener {
             toSearchActivity()
         }
 
 
-            for (genre in genreViewModel.getAllGenres()) {
+        for (genre in genreViewModel.getAllGenres()) {
 
-                    createGridCardViewStory(
-                        requireContext(),
-                        inflater,
-                        linearLayout,
-                        genre,
-                        storyViewModel.getComicStoriesByGenre(genre)
-                    )
-
-
-
-            }
-
-
+            createGridCardViewStory(
+                requireContext(),
+                inflater,
+                linearLayout,
+                genre,
+                storyViewModel.getComicStoriesByGenre(genre)
+            )
+        }
 //        genreViewModel.genres.observe(viewLifecycleOwner, Observer { genres ->
 //
 //

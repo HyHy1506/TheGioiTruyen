@@ -22,10 +22,12 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.thegioitruyen.R
 import com.example.thegioitruyen.databinding.CardStoryItemLayoutBinding
 import com.example.thegioitruyen.databinding.ListCardStoriesLayoutBinding
+import com.example.thegioitruyen.ducactivity.StoriesByGenreActivity
 import com.example.thegioitruyen.ducactivity.StoryOverviewActivity
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
 import com.example.thegioitruyen.ducdataclass.ParagraphDataClass
 import com.example.thegioitruyen.ducdataclass.StoryDataClass
+import com.example.thegioitruyen.ducutils.toActivity
 import java.io.Serializable
 //-------------------------------------
 
@@ -200,6 +202,14 @@ fun createGridCardViewStory(
 
     viewGroup.addView(listCardStoriesLayout)
     //return listCardStoriesLayout
+}
+fun Context.toActivityStoriesByGenre(isComic: Boolean,genre: GenreDataClass){
+    var keyIsComic = getKeyIsComic(this)
+    var keyGenreInfo = getKeyGenreInfo(this)
+    var bundle = Bundle()
+    bundle.putBoolean(keyIsComic, isComic)
+    bundle.putParcelable(keyGenreInfo, genre)
+        toActivity(StoriesByGenreActivity::class.java, getKeyStoriesByGenre(this), bundle)
 }
 fun getExampleGenre(context: Context): GenreDataClass{
     var title= context.getString(R.string.dataNotFound)

@@ -118,51 +118,53 @@
             android:textStyle="normal" />
 
         <com.google.android.flexbox.FlexboxLayout
+            android:id="@+id/flexbox_containerGenreButton_storyOverview"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:flexWrap="wrap"
             >
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/selector_button_text_color_primary"
-                android:text="vui ve"
-                android:background="@drawable/shape_button_primary"
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textColor="@color/selector_button_text_color_primary"-->
+<!--                android:text="vui ve"-->
+<!--                android:background="@drawable/shape_button_primary"-->
 
-                />
-            <androidx.appcompat.widget.AppCompatButton
-                android:padding="10dp"
+<!--                />-->
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:padding="10dp"-->
 
-                android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/selector_button_text_color_primary"
-                android:text="kich tinh"
-                android:background="@drawable/shape_button_primary"
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textColor="@color/selector_button_text_color_primary"-->
+<!--                android:text="kich tinh"-->
+<!--                android:background="@drawable/shape_button_primary"-->
 
-                />
-            <androidx.appcompat.widget.AppCompatButton
-                android:padding="10dp"
+<!--                />-->
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:padding="10dp"-->
 
-                android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/selector_button_text_color_primary"
-                android:text="Lang man"
-                android:background="@drawable/shape_button_primary"
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textColor="@color/selector_button_text_color_primary"-->
+<!--                android:text="Lang man"-->
+<!--                android:background="@drawable/shape_button_primary"-->
 
-                />
-            <androidx.appcompat.widget.AppCompatButton
-                android:padding="10dp"
-                android:layout_margin="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/selector_button_text_color_primary"
-                android:text="Nhan van qua"
-                android:background="@drawable/shape_button_primary"
+<!--                />-->
+<!--            <androidx.appcompat.widget.AppCompatButton-->
+<!--                android:padding="10dp"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:textColor="@color/selector_button_text_color_primary"-->
+<!--                android:text="Nhan van qua"-->
+<!--                android:background="@drawable/shape_button_primary"-->
 
-                />
+<!--                />-->
         </com.google.android.flexbox.FlexboxLayout>
         <View
             android:layout_width="match_parent"
