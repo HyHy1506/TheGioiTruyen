@@ -45,12 +45,19 @@ fun getKeyNextChapterInfo(context: Context): String = context.getString(R.string
 fun getKeyMainChapterInfo(context: Context): String = context.getString(R.string.key_mainChapterInfo)
 fun getKeyResultSearchInfo(context: Context): String = context.getString(R.string.key_resultSearchInfo)
 fun getKeyTextQuery(context: Context): String = context.getString(R.string.key_textQuery)
-
-//--------------------------------------
-
+fun getImageAvatar(context: Context):Int =R.drawable.cat
+fun getLoremIpsum(): String{
+    return "lorem Ipsum"
+}
+fun getLoremIpsumLong(): String{
+    return "Lorem ipsum odor amet, consectetuer adipiscing elit. Ullamcorper scelerisque vivamus leo pharetra inceptos litora vel cubilia himenaeos? Mi cras velit a dapibus rutrum nec imperdiet venenatis. Egestas accumsan inceptos aenean inceptos fringilla tortor facilisi et. Nisi ultrices ornare ex id pellentesque tristique magna ullamcorper. Feugiat massa nisi vivamus morbi platea pellentesque vehicula tellus. Dolor parturient fermentum nascetur, volutpat pretium fringilla."
+}
 fun getTextDataNotFound(context: Context): String{
     return context.resources.getString(R.string.dataNotFound)
 }
+
+//--------------------------------------
+
 
 
 
@@ -123,6 +130,7 @@ fun Context.toActivity(activityClass: Class<out Activity>, key: String, value: B
 fun showTestToast(context: Context){
     Toast.makeText(context,"oke", Toast.LENGTH_SHORT).show()
 }
+
 fun showTestToast(context: Context,text:String){
     Toast.makeText(context,text, Toast.LENGTH_SHORT).show()
 }

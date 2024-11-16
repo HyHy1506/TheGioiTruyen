@@ -2,6 +2,8 @@ package com.example.thegioitruyen.ducactivity
 
 import android.os.Bundle
 import android.os.Debug
+import android.renderscript.ScriptGroup
+import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
@@ -12,9 +14,13 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.NestedScrollView
+import androidx.viewbinding.ViewBinding
 import com.example.thegioitruyen.R
 import com.example.thegioitruyen.databinding.ActivityChapterBinding
+import com.example.thegioitruyen.databinding.CommentOppositeLayoutBinding
+import com.example.thegioitruyen.databinding.CommentSelfLayoutBinding
 import com.example.thegioitruyen.ducdataclass.ChapterDataClass
+import com.example.thegioitruyen.ducdataclass.CommentDataClass
 import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import com.example.thegioitruyen.ducutils.dpToPx
 import com.example.thegioitruyen.ducutils.getKey_chapterInfo
@@ -47,13 +53,13 @@ class ChapterActivity : AppCompatActivity() {
     private var nextChapter: ChapterDataClass? = null
     private var previousChapter: ChapterDataClass? = null
 
-    private val paragraphViewModel: ParagraphViewModel by viewModels{
+    private val paragraphViewModel: ParagraphViewModel by viewModels {
         ParagraphViewModelFactory(this)
     }
-    private val chapterViewModel: ChapterViewModel by viewModels{
+    private val chapterViewModel: ChapterViewModel by viewModels {
         ChapterViewModelFactory(this)
     }
-    private val commentViewModel: CommentViewModel by viewModels{
+    private val commentViewModel: CommentViewModel by viewModels {
         CommentViewModelFactory(this)
     }
 
@@ -87,6 +93,7 @@ class ChapterActivity : AppCompatActivity() {
         setData()
         loadParagraph()
         loadComment()
+        setConfigButtonComment()
         setConfigButtonChapter()
 
         //-------------
@@ -97,10 +104,124 @@ class ChapterActivity : AppCompatActivity() {
 
     }
 
+    private fun setConfigButtonComment() {
+        binding.btnSendCommentUserChapter.setOnClickListener {
+            var content = binding.etxtCommentUserChapter.text.toString()
+            if (content.isEmpty()) {
+                return@setOnClickListener
+            }
+
+            commentViewModel.createUserCommnet(
+                mainChapter?.idStory ?: chapterViewModel.getOneExampleChapter().idStory, content
+            )
+
+            //xoa trang editText de nhap comment moi
+            binding.etxtCommentUserChapter.setText("")
+            // chay lai comment dialog
+            loadComment()
+        }
+    }
+
     private fun loadComment() {
-        var commentsList= commentViewModel.getCommentsByStory(
-            mainChapter?.idStory ?: chapterViewModel.getOneExampleChapter().idStory)
-        binding.linearContainerCommentChapter
+        //lam moi hop thoai scroll view chua cac comment
+        binding.linearContainerCommentChapter.removeAllViews()
+
+        var listComments = commentViewModel.getCommentsByStory(
+            mainChapter?.idStory ?: chapterViewModel.getOneExampleChapter().idStory
+        )
+
+        for (comment in listComments) {
+            var commentLayoutBinding: ViewBinding
+
+            if (commentViewModel.checkCommentFromUser(comment)) {
+                commentLayoutBinding = CommentSelfLayoutBinding.inflate(layoutInflater)
+                setCommentSelf(commentLayoutBinding, comment)
+            } else {
+                commentLayoutBinding = CommentOppositeLayoutBinding.inflate(layoutInflater)
+                setCommentOpposite(commentLayoutBinding, comment)
+            }
+            binding.linearContainerCommentChapter.addView(commentLayoutBinding.root)
+        }
+        binding.scrollViewMainCommentDialogChapter.scrollToBottom()
+    }
+
+    private fun setCommentSelf(
+        commentLayoutBinding: CommentSelfLayoutBinding, comment: CommentDataClass
+    ) {
+        setCommentSelfLayoutParams((commentLayoutBinding.root))
+
+        commentLayoutBinding.txtDisplayNameCommentSelfLayout.text =
+            commentViewModel.getDisplayNameUserByComment(comment)
+        commentLayoutBinding.txtContentCommentSelfLayout.text = comment.content
+        commentLayoutBinding.imgAvatarUserCommentSelfLayout.setImageResource(
+            commentViewModel.getAvatarUserByComment(comment)
+        )
+        commentLayoutBinding.txtDateCreatedCommentSelfLayout.text = comment.date
+    }
+
+    private fun setCommentOpposite(
+        commentLayoutBinding: CommentOppositeLayoutBinding, comment: CommentDataClass
+    ) {
+        setCommentOppositeLayoutParams(commentLayoutBinding.root)
+
+        commentLayoutBinding.txtDisplayNameCommentOppositeLayout.text =
+            commentViewModel.getDisplayNameUserByComment(comment)
+        commentLayoutBinding.txtContentCommentOppositeLayout.text = comment.content
+        commentLayoutBinding.imgAvatarUserCommentOppositeLayout.setImageResource(
+            commentViewModel.getAvatarUserByComment(comment)
+        )
+        commentLayoutBinding.txtDateCreatedCommentOppositeLayout.text = comment.date
+    }
+
+    fun setCommentSelfLayoutParams(view: View) {
+        view.apply {
+            //android:layout_width="wrap_content"
+            //android:layout_height="wrap_content"
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+
+            //android:layout_margin="10dp"
+            layoutParams = ViewGroup.MarginLayoutParams(layoutParams).apply {
+                setMargins(10.dpToPx(), 10.dpToPx(), 10.dpToPx(), 10.dpToPx())
+            }
+
+            //android:layout_gravity="end"
+            layoutParams = LinearLayout.LayoutParams(layoutParams).apply {
+                gravity = Gravity.END
+            }
+            //android:orientation="vertical"
+            if (view is LinearLayout) {
+                (view as LinearLayout).orientation = LinearLayout.VERTICAL
+            }
+
+        }
+    }
+
+    fun setCommentOppositeLayoutParams(view: View) {
+        view.apply {
+            //android:layout_width="wrap_content"
+            //android:layout_height="wrap_content"
+            layoutParams = ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+
+            //android:layout_margin="10dp"
+            layoutParams = ViewGroup.MarginLayoutParams(layoutParams).apply {
+                setMargins(10.dpToPx(), 10.dpToPx(), 10.dpToPx(), 10.dpToPx())
+            }
+
+            //android:layout_gravity="start"
+            layoutParams = LinearLayout.LayoutParams(layoutParams).apply {
+                gravity = Gravity.START
+            }
+
+            //android:orientation="vertical"
+            if (view is LinearLayout) {
+                (view as LinearLayout).orientation = LinearLayout.VERTICAL
+            }
+
+        }
     }
 
     private fun loadParagraph() {
@@ -181,7 +302,7 @@ class ChapterActivity : AppCompatActivity() {
 
     private fun setConfigButtonChapter(
     ) {
-       // kiem tra cac nut chuong truoc va chuong sau
+        // kiem tra cac nut chuong truoc va chuong sau
         if (previousChapter == null) {
             binding.btnPreviousChapterChapter.isEnabled = false
         } else {
@@ -285,7 +406,8 @@ class ChapterActivity : AppCompatActivity() {
             }
         })
     }
-    private fun resetData(){
+
+    private fun resetData() {
         setData()
         loadParagraph()
         setConfigButtonChapter()
