@@ -21,11 +21,14 @@ import com.example.thegioitruyen.ducutils.getKey_nextChapter
 import com.example.thegioitruyen.ducutils.getKey_previousChapter
 import com.example.thegioitruyen.ducutils.toActivity
 import com.example.thegioitruyen.ducviewmodel.ChapterViewModel
+import com.example.thegioitruyen.ducviewmodelfactory.ChapterViewModelFactory
 
 class StoryOverviewActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoryOverviewBinding
     private lateinit var storyInfo: StoryDataClass
-    private val chapterViewModel: ChapterViewModel by viewModels()
+    private val chapterViewModel: ChapterViewModel by viewModels{
+        ChapterViewModelFactory(this)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityStoryOverviewBinding.inflate(layoutInflater)

@@ -3,8 +3,10 @@ package com.example.thegioitruyen
 import android.content.Context
 import com.example.thegioitruyen.ducdataclass.StoryDataClass
 import com.example.thegioitruyen.ducdataclass.ChapterDataClass
+import com.example.thegioitruyen.ducdataclass.CommentDataClass
 import com.example.thegioitruyen.ducdataclass.GenreDataClass
 import com.example.thegioitruyen.ducdataclass.ParagraphDataClass
+import com.example.thegioitruyen.ducutils.getLoremIpsum
 import com.example.thegioitruyen.ducutils.getLoremIpsumLong
 import com.example.thegioitruyen.ducviewmodel.ParagraphViewModel
 
@@ -13,13 +15,20 @@ object SampleDataStory {
     private val listOfGenre = mutableListOf<GenreDataClass>()
     private val listOfChapter = mutableListOf<ChapterDataClass>()
     private val listOfParagraph = mutableListOf<ParagraphDataClass>()
-
+    private val listOfComment = mutableListOf<CommentDataClass>()
+    private var sumIdComment:Int=0
+    var idUser:Int get()=1106
+        private set(value) {}
+    var date: String get() ="11/11/2004"
+        private set(value) {}
     //-----------------------------------------------------
-
+    fun getOneStoryByID(context: Context,idStory:Int): StoryDataClass{
+        return getDataList(context).filter { it.idStory==idStory }.first()
+    }
     fun addData(data : StoryDataClass){
         dataList.add(data)
     }
-    fun getDataList(): List<StoryDataClass>{
+    fun getDataList(context: Context): List<StoryDataClass>{
         dataList.clear()
         generateData()
         return dataList
@@ -72,10 +81,13 @@ object SampleDataStory {
         }
     }
     //-----------------------------------------------------
+    fun getOneGenreByID(context: Context,idGenre:Int): GenreDataClass{
+        return getListOfGenre(context).filter { it.idGenre==idGenre }.first()
+    }
     fun addGenre(item : GenreDataClass){
         listOfGenre.add(item)
     }
-    fun getListOfGenre(): List<GenreDataClass>{
+    fun getListOfGenre(context: Context): List<GenreDataClass>{
         listOfGenre.clear()
         generateListOfGenre()
         return  listOfGenre
@@ -95,7 +107,7 @@ object SampleDataStory {
 
         )
         var idList = arrayOf(
-            11,22,33,44,55,66,77,88,99
+            1,2,3,4,5,6,7,8,9
 
         )
         for(i in idList.indices){
@@ -109,13 +121,16 @@ object SampleDataStory {
 
     }
     //------------------------------
+    fun getOneChapterByID(context: Context,idChapter:Int): ChapterDataClass{
+        return getListOfChapter(context).filter { it.idChapter==idChapter }.first()
+    }
     fun getOneChapter(): ChapterDataClass{
-        return ChapterDataClass(1,"Chuong 1: khong gia tri","01/02/2024")
+        return ChapterDataClass(1,1,"Chuong 1: khong gia tri","01/02/2024")
     }
     fun addChapter(item : ChapterDataClass){
         listOfChapter.add(item)
     }
-    fun getListOfChapter(): List<ChapterDataClass>{
+    fun getListOfChapter(context: Context): List<ChapterDataClass>{
         listOfChapter.clear()
         generateListOfChapter()
         return  listOfChapter
@@ -144,17 +159,24 @@ object SampleDataStory {
            1,2,3,4,5,6
 
         )
-        for(i in idList.indices){
-            var item = ChapterDataClass(
-                idList[i],titleList[i],dateCraetedList[i]
-            )
-            addChapter(item)
+        for(story in dataList)
+        {
+            for(i in idList.indices){
+                var item = ChapterDataClass(
+                    idList[i],story.idStory,titleList[i]+" ${story.idStory}",dateCraetedList[i]
+                )
+                addChapter(item)
+            }
         }
+
 
 
 
     }
     //------------------------------
+    fun getOneParagraphByID(context: Context,idParagraph:Int): ParagraphDataClass{
+        return getListOfParagraph(context).filter { it.idParagraph==idParagraph }.first()
+    }
     fun addParagraph(item : ParagraphDataClass){
         listOfParagraph.add(item)
     }
@@ -174,7 +196,7 @@ object SampleDataStory {
     }
     private fun generateListOfParagraph(context: Context){
 
-            var item1 = ParagraphDataClass(1,null, getLoremIpsumLong(context),1,1,false)
+        var item1 = ParagraphDataClass(1,null, getLoremIpsumLong(context),1,1,false)
         var item2 = ParagraphDataClass(2,null, getLoremIpsumLong(context),2,1,false)
         var item3 = ParagraphDataClass(3,R.drawable.pa1, null,1,2)
         var item4 = ParagraphDataClass(4,R.drawable.pa2, null,2,2)
@@ -193,5 +215,43 @@ object SampleDataStory {
 
 
 
+    }
+    //---------------------------------------------------
+     fun addComment(item: CommentDataClass ){
+        listOfComment.add(item)
+    }
+    fun addUserComment(idStory:Int,content:String,date:String){
+        listOfComment.add(CommentDataClass(getNextIdComment(),idStory,idUser,content,date))
+    }
+
+    fun getListOfComment(context: Context): List<CommentDataClass>{
+        listOfComment.clear()
+        generateListOfComment(context)
+        return  listOfComment
+    }
+    private fun generateListOfComment(context: Context){
+
+        for(story in dataList)
+        {
+            for(i in 1..3){
+                var item = CommentDataClass(getNextIdComment() ,story.idStory,i, getLoremIpsum(context),"11/11/2004")
+
+                addComment(item)
+            }
+            addComment(CommentDataClass(getNextIdComment(),story.idStory,idUser,getLoremIpsumLong(context),date))
+
+
+            addComment(CommentDataClass(getNextIdComment(),story.idStory,idUser,getLoremIpsum(context),date))
+
+
+            for (i in 6..8) {
+                var item = CommentDataClass(getNextIdComment(),story.idStory, i, getLoremIpsumLong(context), "11/11/2004")
+                addComment(item)
+            }
+        }
+    }
+    private fun getNextIdComment():Int{
+        sumIdComment=sumIdComment+1
+        return sumIdComment
     }
 }

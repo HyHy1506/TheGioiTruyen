@@ -5,5 +5,5 @@ import kotlinx.parcelize.Parcelize
 
 import java.io.Serializable
 @Parcelize
-data class ChapterDataClass(var idChapter: Int, var title: String,
+data class ChapterDataClass(var idChapter: Int,var idStory:Int, var title: String,
                             var dateCreated: String): Parcelable

@@ -32,6 +32,8 @@ import com.example.thegioitruyen.ducutils.getKeyIsComic
 import com.example.thegioitruyen.ducutils.toActivity
 import com.example.thegioitruyen.ducviewmodel.GenreViewModel
 import com.example.thegioitruyen.ducviewmodel.StoryViewModel
+import com.example.thegioitruyen.ducviewmodelfactory.GenreViewModelFactory
+import com.example.thegioitruyen.ducviewmodelfactory.StoryViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -53,8 +55,12 @@ class ComicStories_User_Fragment : Fragment() {
     private var isComic = true
 
 
-    val storiesViewModel: StoryViewModel by viewModels()
-    val genreViewModel: GenreViewModel by viewModels()
+    private val storyViewModel: StoryViewModel by viewModels{
+        StoryViewModelFactory(requireContext())
+    }
+    val genreViewModel: GenreViewModel by viewModels{
+        GenreViewModelFactory(requireContext())
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -80,7 +86,8 @@ class ComicStories_User_Fragment : Fragment() {
             view.context, 1, GridLayoutManager.HORIZONTAL, false
         )
         recyclerViewGenreButton.adapter = Button_Adapter(
-            requireContext(), ArrayList(genreViewModel.genres.value), isComic
+            //requireContext(), ArrayList(genreViewModel.genres.value), isComic
+            requireContext(), ArrayList(genreViewModel.getAllGenres()), isComic
         )
 
 
@@ -92,25 +99,40 @@ class ComicStories_User_Fragment : Fragment() {
         }
 
 
-        genreViewModel.genres.observe(viewLifecycleOwner, Observer { genres ->
+            for (genre in genreViewModel.getAllGenres()) {
 
-
-            for (i in genres.indices) {
-                if(requireContext() != null && inflater != null && genres[i] != null && storiesViewModel.getComicStoriesByGenre(genres[i]) != null)
-                {
                     createGridCardViewStory(
                         requireContext(),
                         inflater,
                         linearLayout,
-                        genres[i],
-                        storiesViewModel.getComicStoriesByGenre(genres[i])
+                        genre,
+                        storyViewModel.getComicStoriesByGenre(genre)
                     )
-                }
+
 
 
             }
 
-        })
+
+//        genreViewModel.genres.observe(viewLifecycleOwner, Observer { genres ->
+//
+//
+//            for (i in genres.indices) {
+//                if(requireContext() != null && inflater != null && genres[i] != null && storiesViewModel.getComicStoriesByGenre(genres[i]) != null)
+//                {
+//                    createGridCardViewStory(
+//                        requireContext(),
+//                        inflater,
+//                        linearLayout,
+//                        genres[i],
+//                        storiesViewModel.getComicStoriesByGenre(genres[i])
+//                    )
+//                }
+//
+//
+//            }
+//
+//        })
         ///////////////////////
 
 //       ---------------------------------------------------------------------------------

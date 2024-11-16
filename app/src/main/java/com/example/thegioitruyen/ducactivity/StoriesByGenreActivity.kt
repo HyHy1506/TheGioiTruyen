@@ -19,10 +19,13 @@ import com.example.thegioitruyen.ducutils.getKeyIsComic
 import com.example.thegioitruyen.ducutils.getKeyStoriesByGenre
 import com.example.thegioitruyen.ducutils.getTextDataNotFound
 import com.example.thegioitruyen.ducviewmodel.StoryViewModel
+import com.example.thegioitruyen.ducviewmodelfactory.StoryViewModelFactory
 
 class StoriesByGenreActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoriesByGenreBinding
-    private val storyViewModel : StoryViewModel by viewModels()
+    private val storyViewModel: StoryViewModel by viewModels{
+        StoryViewModelFactory(this)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

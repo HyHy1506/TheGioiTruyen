@@ -20,6 +20,7 @@ import com.example.thegioitruyen.ducutils.getKeyTextQuery
 import com.example.thegioitruyen.ducutils.showTestToast
 import com.example.thegioitruyen.ducutils.toActivity
 import com.example.thegioitruyen.ducviewmodel.StoryViewModel
+import com.example.thegioitruyen.ducviewmodelfactory.StoryViewModelFactory
 
 class SearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySearchBinding
@@ -27,7 +28,9 @@ class SearchActivity : AppCompatActivity() {
     private lateinit var listViewSearchResults: ListView
     private lateinit var searchAdapter: ListSearch_ArrayAdapter
     private lateinit var dataList: ArrayList<StoryDataClass>
-    private val storyViewModel: StoryViewModel by viewModels()
+    private val storyViewModel: StoryViewModel by viewModels{
+        StoryViewModelFactory(this)
+    }
     private var isComic: Boolean = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

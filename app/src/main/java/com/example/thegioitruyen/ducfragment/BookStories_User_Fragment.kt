@@ -5,12 +5,15 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
 import androidx.viewpager2.widget.ViewPager2
 import com.example.thegioitruyen.databinding.FragmentBookStoriesUserBinding
 import com.example.thegioitruyen.ducadapter.FragmentPage_BookStories_Adapter
 import com.example.thegioitruyen.ducviewmodel.GenreViewModel
 import com.example.thegioitruyen.ducviewmodel.StoryViewModel
+import com.example.thegioitruyen.ducviewmodelfactory.GenreViewModelFactory
+import com.example.thegioitruyen.ducviewmodelfactory.StoryViewModelFactory
 import com.google.android.material.tabs.TabLayout
 
 // TODO: Rename parameter arguments, choose names that match
@@ -27,8 +30,12 @@ class BookStories_User_Fragment : Fragment() {
 
     private lateinit var binding: FragmentBookStoriesUserBinding
     private lateinit var pageAdapter: FragmentPage_BookStories_Adapter
-    private val storyViewModel: StoryViewModel by viewModels()
-    private val genreViewModel: GenreViewModel by viewModels()
+    private val storyViewModel: StoryViewModel by viewModels{
+        StoryViewModelFactory(requireContext())
+    }
+    private val genreViewModel: GenreViewModel by viewModels{
+        GenreViewModelFactory(requireContext())
+    }
 
     // TODO: Rename and change types of parameters
     private var param1: String? = null

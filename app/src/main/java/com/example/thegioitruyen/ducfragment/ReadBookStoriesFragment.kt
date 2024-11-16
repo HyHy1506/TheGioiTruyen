@@ -47,7 +47,7 @@ class ReadBookStoriesFragment : Fragment() {
         binding= FragmentReadBookStoriesBinding.inflate(layoutInflater)
         val view = binding.root
         //____________________________________________
-        var cardStoryAdapter= CardStoryItem_Adapter(view.context,ArrayList(SampleDataStory.getDataList()))
+        var cardStoryAdapter= CardStoryItem_Adapter(view.context,ArrayList(SampleDataStory.getDataList(requireContext())))
         var recyclerView: RecyclerView=binding.recyclerCardStoryReadBookFragment
         recyclerView.adapter=cardStoryAdapter
         recyclerView.layoutManager= GridLayoutManager(view.context,3, LinearLayoutManager.VERTICAL,false)

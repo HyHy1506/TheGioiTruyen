@@ -17,13 +17,17 @@ import com.example.thegioitruyen.ducutils.getKeyResultSearchInfo
 import com.example.thegioitruyen.ducutils.getKeyTextQuery
 import com.example.thegioitruyen.ducutils.getTextDataNotFound
 import com.example.thegioitruyen.ducviewmodel.StoryViewModel
+import com.example.thegioitruyen.ducviewmodelfactory.StoryViewModelFactory
 
 class ResultSearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityResultSearchBinding
     private lateinit var dataList: ArrayList< StoryDataClass>
     private lateinit var textQuery: String
     private var isComic : Boolean=true
-    private val storyViewModel: StoryViewModel by viewModels()
+    private val storyViewModel: StoryViewModel by viewModels{
+        StoryViewModelFactory(this)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

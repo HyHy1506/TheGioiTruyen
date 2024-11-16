@@ -40,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxWidth="250dp"
+            android:maxWidth="200dp"
             android:minWidth="140dp"
             android:text="binh luan ne ád d ád áda á a d á dá d d á  d  ád a á dá"
             android:textColor="@color/white"

@@ -47,7 +47,7 @@ class LoveBookStoriesFragment : Fragment() {
         binding= FragmentLoveBookStoriesBinding.inflate(layoutInflater)
         val view = binding.root
 
-        var cardStoryAdapter= CardStoryItem_Adapter(view.context,ArrayList(SampleDataStory.getDataList()))
+        var cardStoryAdapter= CardStoryItem_Adapter(view.context,ArrayList(SampleDataStory.getDataList(requireContext())))
         var recyclerView: RecyclerView=binding.recyclerCardStoryLoveBookFragment
         recyclerView.adapter=cardStoryAdapter
         recyclerView.layoutManager= GridLayoutManager(view.context,3, LinearLayoutManager.VERTICAL,false)

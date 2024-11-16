@@ -28,7 +28,11 @@ import com.example.thegioitruyen.ducutils.scrollToBottom
 import com.example.thegioitruyen.ducutils.showTestToast
 import com.example.thegioitruyen.ducutils.showTestToastLong
 import com.example.thegioitruyen.ducviewmodel.ChapterViewModel
+import com.example.thegioitruyen.ducviewmodel.CommentViewModel
 import com.example.thegioitruyen.ducviewmodel.ParagraphViewModel
+import com.example.thegioitruyen.ducviewmodelfactory.ChapterViewModelFactory
+import com.example.thegioitruyen.ducviewmodelfactory.CommentViewModelFactory
+import com.example.thegioitruyen.ducviewmodelfactory.ParagraphViewModelFactory
 import com.github.chrisbanes.photoview.PhotoView
 
 class ChapterActivity : AppCompatActivity() {
@@ -43,8 +47,16 @@ class ChapterActivity : AppCompatActivity() {
     private var nextChapter: ChapterDataClass? = null
     private var previousChapter: ChapterDataClass? = null
 
-    private val paragraphViewModel: ParagraphViewModel by viewModels()
-    private val chapterViewModel: ChapterViewModel by viewModels()
+    private val paragraphViewModel: ParagraphViewModel by viewModels{
+        ParagraphViewModelFactory(this)
+    }
+    private val chapterViewModel: ChapterViewModel by viewModels{
+        ChapterViewModelFactory(this)
+    }
+    private val commentViewModel: CommentViewModel by viewModels{
+        CommentViewModelFactory(this)
+    }
+
     private var isTopFrameVisible = true
     private var isBottomFrameVisible = true
 
@@ -74,6 +86,7 @@ class ChapterActivity : AppCompatActivity() {
         }
         setData()
         loadParagraph()
+        loadComment()
         setConfigButtonChapter()
 
         //-------------
@@ -84,6 +97,12 @@ class ChapterActivity : AppCompatActivity() {
 
     }
 
+    private fun loadComment() {
+        var commentsList= commentViewModel.getCommentsByStory(
+            mainChapter?.idStory ?: chapterViewModel.getOneExampleChapter().idStory)
+        binding.linearContainerCommentChapter
+    }
+
     private fun loadParagraph() {
 
         var linearContainer = binding.linearContainerContentChapter
@@ -91,7 +110,7 @@ class ChapterActivity : AppCompatActivity() {
         linearContainer.removeAllViews()
         binding.scrollParagraphChapter.scrollTo(0, 0)
 
-        var paragraphsList = paragraphViewModel.getAllParagraphsByChapter(this,mainChapter)
+        var paragraphsList = paragraphViewModel.getAllParagraphsByChapter(mainChapter)
         if (paragraphsList.isEmpty()) {
             return
         }
@@ -161,7 +180,6 @@ class ChapterActivity : AppCompatActivity() {
     }
 
     private fun setConfigButtonChapter(
-
     ) {
        // kiem tra cac nut chuong truoc va chuong sau
         if (previousChapter == null) {

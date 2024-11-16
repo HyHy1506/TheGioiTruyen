@@ -29,6 +29,8 @@ import com.example.thegioitruyen.ducutils.getKeyIsComic
 import com.example.thegioitruyen.ducutils.toActivity
 import com.example.thegioitruyen.ducviewmodel.GenreViewModel
 import com.example.thegioitruyen.ducviewmodel.StoryViewModel
+import com.example.thegioitruyen.ducviewmodelfactory.GenreViewModelFactory
+import com.example.thegioitruyen.ducviewmodelfactory.StoryViewModelFactory
 import kotlin.getValue
 
 // TODO: Rename parameter arguments, choose names that match
@@ -45,8 +47,12 @@ class TextStories_User_Fragment : Fragment() {
     private lateinit var binding: FragmentTextStoriesBinding
     private lateinit var recyclerViewGenreButton: RecyclerView
     private lateinit var linearLayout: LinearLayout
-    private val storyViewModel: StoryViewModel by viewModels()
-    private val genreViewModel: GenreViewModel by viewModels()
+    private val storyViewModel: StoryViewModel by viewModels{
+        StoryViewModelFactory(requireContext())
+    }
+    private val genreViewModel: GenreViewModel by viewModels{
+        GenreViewModelFactory(requireContext())
+    }
     private var isComic=false
 
 
@@ -85,10 +91,10 @@ class TextStories_User_Fragment : Fragment() {
             1,
             GridLayoutManager.HORIZONTAL,false)
         recyclerViewGenreButton.adapter= Button_Adapter(
-            requireContext(),ArrayList( genreViewModel.genres.value),
+            requireContext(),ArrayList( genreViewModel.getAllGenres()),
             isComic)
-        genreViewModel.genres.observe(viewLifecycleOwner, Observer {genres->
-            for(i in genres )
+
+            for(i in genreViewModel.getAllGenres() )
             {
                 createGridCardViewStory(requireContext()
                     ,inflater
@@ -100,7 +106,7 @@ class TextStories_User_Fragment : Fragment() {
 
             }
 
-        })
+
 
 
         var searchImgBtn=binding.searchButtonTextStoriesUser
