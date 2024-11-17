@@ -13,31 +13,31 @@
         android:theme="@style/Theme.TheGioiTruyen"
         tools:targetApi="31">
         <activity
-            android:name=".ducactivity.StoriesByGenreActivity"
+            android:name=".ducactivity.DucStoriesByGenreActivity"
             android:exported="false" />
         <activity
-            android:name=".ducactivity.SignUpActivity"
+            android:name=".ducactivity.DucSignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".ducactivity.LoginActivity"
+            android:name=".ducactivity.DucLoginActivity"
             android:exported="false" />
         <activity
-            android:name=".ducactivity.ResultSearchActivity"
+            android:name=".ducactivity.DucResultSearchActivity"
             android:exported="false" />
         <activity
-            android:name=".ducactivity.ChapterActivity"
+            android:name=".ducactivity.DucChapterActivity"
             android:exported="false" />
         <activity
-            android:name=".ducactivity.StoryOverviewActivity"
+            android:name=".ducactivity.DucStoryOverviewActivity"
             android:exported="false" />
         <activity
-            android:name=".ducactivity.SearchActivity"
+            android:name=".ducactivity.DucSearchActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
-            android:name=".ducactivity.UserHomeActivity"
+            android:name=".ducactivity.DucUserHomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

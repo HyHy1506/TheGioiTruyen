@@ -8,7 +8,6 @@ import android.widget.ScrollView
 import android.content.Context
 import android.content.Intent
 import android.graphics.PorterDuff
-import android.os.Build
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.Gravity
@@ -16,18 +15,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.GridLayout
-import android.widget.LinearLayout
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.thegioitruyen.R
 import com.example.thegioitruyen.databinding.CardStoryItemLayoutBinding
 import com.example.thegioitruyen.databinding.ListCardStoriesLayoutBinding
-import com.example.thegioitruyen.ducactivity.StoriesByGenreActivity
-import com.example.thegioitruyen.ducactivity.StoryOverviewActivity
-import com.example.thegioitruyen.ducdataclass.GenreDataClass
-import com.example.thegioitruyen.ducdataclass.ParagraphDataClass
-import com.example.thegioitruyen.ducdataclass.StoryDataClass
-import com.example.thegioitruyen.ducutils.toActivity
+import com.example.thegioitruyen.ducactivity.DucStoriesByGenreActivity
+import com.example.thegioitruyen.ducactivity.DucStoryOverviewActivity
+import com.example.thegioitruyen.ducdataclass.DucGenreDataClass
+import com.example.thegioitruyen.ducdataclass.DucParagraphDataClass
+import com.example.thegioitruyen.ducdataclass.DucStoryDataClass
 import java.io.Serializable
 //-------------------------------------
 
@@ -153,9 +149,9 @@ fun getKey_chapterInfo(context: Context):String{
 }
 fun createGridCardViewStory(
     context: Context,
-     inflater:LayoutInflater,
-    viewGroup: ViewGroup ,genre: GenreDataClass,
-    dataList: List<StoryDataClass> ){
+    inflater:LayoutInflater,
+    viewGroup: ViewGroup, genre: DucGenreDataClass,
+    dataList: List<DucStoryDataClass> ){
     var blistCardStoriesLayout= ListCardStoriesLayoutBinding.inflate(inflater)
     val listCardStoriesLayout = blistCardStoriesLayout.root
     var gridLayout=blistCardStoriesLayout.gridLayoutListCardStory
@@ -181,7 +177,7 @@ fun createGridCardViewStory(
         constraintLayout.changeShapeBackgroundColorByScore(i.score)
         cardView.setOnClickListener({
             // truyen mot dataclass den activity moi
-            context.toActivity(StoryOverviewActivity::class.java, context.getString(R.string.key_storyInfo),i)
+            context.toActivity(DucStoryOverviewActivity::class.java, context.getString(R.string.key_storyInfo),i)
 
             //   .toActivity(StoryOverviewActivity::class.java, R.string.key_storyInfo,i)
         })
@@ -203,34 +199,34 @@ fun createGridCardViewStory(
     viewGroup.addView(listCardStoriesLayout)
     //return listCardStoriesLayout
 }
-fun Context.toActivityStoriesByGenre(isComic: Boolean,genre: GenreDataClass){
+fun Context.toActivityStoriesByGenre(isComic: Boolean,genre: DucGenreDataClass){
     var keyIsComic = getKeyIsComic(this)
     var keyGenreInfo = getKeyGenreInfo(this)
     var bundle = Bundle()
     bundle.putBoolean(keyIsComic, isComic)
     bundle.putParcelable(keyGenreInfo, genre)
-        toActivity(StoriesByGenreActivity::class.java, getKeyStoriesByGenre(this), bundle)
+        toActivity(DucStoriesByGenreActivity::class.java, getKeyStoriesByGenre(this), bundle)
 }
-fun getExampleGenre(context: Context): GenreDataClass{
+fun getExampleGenre(context: Context): DucGenreDataClass{
     var title= context.getString(R.string.dataNotFound)
-    return GenreDataClass(1, title)
+    return DucGenreDataClass(1, title)
 }
-fun getExampleComicParagraph(context: Context): ParagraphDataClass{
-    return ParagraphDataClass(
+fun getExampleComicParagraph(context: Context): DucParagraphDataClass{
+    return DucParagraphDataClass(
         1
         ,R.drawable.pa1
         , context.getString(R.string.loremIpsum),
         1,1,true)
 }
-fun getExampleTextParagraph(context: Context): ParagraphDataClass{
-    return ParagraphDataClass(
+fun getExampleTextParagraph(context: Context): DucParagraphDataClass{
+    return DucParagraphDataClass(
         1
         ,R.drawable.pa1
         , context.getString(R.string.loremIpsum),
         1,1,false)
 }
-fun getExampleComicStory(context: Context): StoryDataClass{
-    return StoryDataClass(1,
+fun getExampleComicStory(context: Context): DucStoryDataClass{
+    return DucStoryDataClass(1,
        context.getString(R.string.dataNotFound),
        context.getString(R.string.dataNotFound),
         context.getString(R.string.loremIpsum),
@@ -241,8 +237,8 @@ fun getExampleComicStory(context: Context): StoryDataClass{
         true
         )
 }
-fun getExampleTextStory(context: Context): StoryDataClass{
-    return StoryDataClass(1,
+fun getExampleTextStory(context: Context): DucStoryDataClass{
+    return DucStoryDataClass(1,
         context.getString(R.string.dataNotFound),
        context.getString(R.string.dataNotFound),
         context.getString(R.string.loremIpsum),

@@ -1,22 +1,20 @@
 package com.example.thegioitruyen
 
 import android.content.Context
-import com.example.thegioitruyen.ducdataclass.StoryDataClass
-import com.example.thegioitruyen.ducdataclass.ChapterDataClass
-import com.example.thegioitruyen.ducdataclass.CommentDataClass
-import com.example.thegioitruyen.ducdataclass.GenreDataClass
-import com.example.thegioitruyen.ducdataclass.ParagraphDataClass
+import com.example.thegioitruyen.ducdataclass.DucStoryDataClass
+import com.example.thegioitruyen.ducdataclass.DucChapterDataClass
+import com.example.thegioitruyen.ducdataclass.DucCommentDataClass
+import com.example.thegioitruyen.ducdataclass.DucGenreDataClass
+import com.example.thegioitruyen.ducdataclass.DucParagraphDataClass
 import com.example.thegioitruyen.ducutils.getLoremIpsum
 import com.example.thegioitruyen.ducutils.getLoremIpsumLong
-import com.example.thegioitruyen.ducutils.showTestToast
-import com.example.thegioitruyen.ducviewmodel.ParagraphViewModel
 
 object SampleDataStory {
-    private val dataList= mutableListOf<StoryDataClass>()
-    private val listOfGenre = mutableListOf<GenreDataClass>()
-    private val listOfChapter = mutableListOf<ChapterDataClass>()
-    private val listOfParagraph = mutableListOf<ParagraphDataClass>()
-    private val listOfComment = mutableListOf<CommentDataClass>()
+    private val dataList= mutableListOf<DucStoryDataClass>()
+    private val listOfGenre = mutableListOf<DucGenreDataClass>()
+    private val listOfChapter = mutableListOf<DucChapterDataClass>()
+    private val listOfParagraph = mutableListOf<DucParagraphDataClass>()
+    private val listOfComment = mutableListOf<DucCommentDataClass>()
     private var sumIdComment:Int=0
     var idUser:Int get()=4
         private set(value) {}
@@ -30,13 +28,13 @@ object SampleDataStory {
         generateListOfParagraph()
         generateListOfChapter()
     }
-    fun getOneStoryByID(context: Context,idStory:Int): StoryDataClass{
+    fun getOneStoryByID(context: Context,idStory:Int): DucStoryDataClass{
         return getDataList(context).filter { it.idStory==idStory }.first()
     }
-    fun addData(data : StoryDataClass){
+    fun addData(data : DucStoryDataClass){
         dataList.add(data)
     }
-    fun getDataList(context: Context): List<StoryDataClass>{
+    fun getDataList(context: Context): List<DucStoryDataClass>{
 //        dataList.clear()
 //        generateData()
         return dataList
@@ -74,7 +72,7 @@ object SampleDataStory {
         val scoreList = arrayOf(3.5f, 4f, 5f, 1f, 4.5f, 1f, 4.5f, 2f)
         val idStoriesList = arrayOf(1,2,3,4,5,6,7,8)
         for(i in titleList.indices){
-            val item = StoryDataClass(
+            val item = DucStoryDataClass(
                 idStoriesList[i],
                 titleList[i],
                 authorList[i],
@@ -89,13 +87,13 @@ object SampleDataStory {
         }
     }
     //-----------------------------------------------------
-    fun getOneGenreByID(context: Context,idGenre:Int): GenreDataClass{
+    fun getOneGenreByID(context: Context,idGenre:Int): DucGenreDataClass{
         return getListOfGenre(context).filter { it.idGenre==idGenre }.first()
     }
-    fun addGenre(item : GenreDataClass){
+    fun addGenre(item : DucGenreDataClass){
         listOfGenre.add(item)
     }
-    fun getListOfGenre(context: Context): List<GenreDataClass>{
+    fun getListOfGenre(context: Context): List<DucGenreDataClass>{
 //        listOfGenre.clear()
 //        generateListOfGenre()
         return  listOfGenre
@@ -119,7 +117,7 @@ object SampleDataStory {
 
         )
         for(i in idList.indices){
-            var item = GenreDataClass(
+            var item = DucGenreDataClass(
                 idList[i],titleList[i]
             )
             addGenre(item)
@@ -129,16 +127,16 @@ object SampleDataStory {
 
     }
     //------------------------------
-    fun getOneChapterByID(context: Context,idChapter:Int): ChapterDataClass{
+    fun getOneChapterByID(context: Context,idChapter:Int): DucChapterDataClass{
         return getListOfChapter(context).filter { it.idChapter==idChapter }.first()
     }
-    fun getOneChapter(): ChapterDataClass{
-        return ChapterDataClass(1,1,"Chuong 1: khong gia tri","01/02/2024")
+    fun getOneChapter(): DucChapterDataClass{
+        return DucChapterDataClass(1,1,"Chuong 1: khong gia tri","01/02/2024")
     }
-    fun addChapter(item : ChapterDataClass){
+    fun addChapter(item : DucChapterDataClass){
         listOfChapter.add(item)
     }
-    fun getListOfChapter(context: Context): List<ChapterDataClass>{
+    fun getListOfChapter(context: Context): List<DucChapterDataClass>{
 //        listOfChapter.clear()
 //        generateListOfChapter()
         return  listOfChapter
@@ -171,7 +169,7 @@ object SampleDataStory {
         for(story in dataList)
         {
             for(i in idList.indices){
-                var item = ChapterDataClass(
+                var item = DucChapterDataClass(
                     idChapter,story.idStory,titleList[i]+" ${story.idStory}",dateCraetedList[i]
                 )
                 idChapter++
@@ -184,22 +182,22 @@ object SampleDataStory {
 
     }
     //------------------------------
-    fun getOneParagraphByID(context: Context,idParagraph:Int): ParagraphDataClass{
+    fun getOneParagraphByID(context: Context,idParagraph:Int): DucParagraphDataClass{
         return getListOfParagraph(context).filter { it.idParagraph==idParagraph }.first()
     }
-    fun addParagraph(item : ParagraphDataClass){
+    fun addParagraph(item : DucParagraphDataClass){
         listOfParagraph.add(item)
     }
-    fun addParagraph(item: Array<ParagraphDataClass> ){
+    fun addParagraph(item: Array<DucParagraphDataClass> ){
         listOfParagraph.addAll(item)
     }
-    fun getOneComicParagraph(): ParagraphDataClass{
-       return ParagraphDataClass(3,R.drawable.pa1, null,1,2)
+    fun getOneComicParagraph(): DucParagraphDataClass{
+       return DucParagraphDataClass(3,R.drawable.pa1, null,1,2)
     }
-    fun getOneTextParagraph(context:Context): ParagraphDataClass{
-        return ParagraphDataClass(1,null, getLoremIpsumLong(context),1,1,false)
+    fun getOneTextParagraph(context:Context): DucParagraphDataClass{
+        return DucParagraphDataClass(1,null, getLoremIpsumLong(context),1,1,false)
     }
-    fun getListOfParagraph(context: Context): List<ParagraphDataClass>{
+    fun getListOfParagraph(context: Context): List<DucParagraphDataClass>{
 //        listOfParagraph.clear()
 //        generateListOfParagraph()
         return  listOfParagraph
@@ -208,25 +206,25 @@ object SampleDataStory {
         var idParagraph:Int=1
         //so chapter hien tai cua truyen comic
         for(i in 1..24){
-            var item1 = ParagraphDataClass(idParagraph,R.drawable.pa1, null,1,i)
+            var item1 = DucParagraphDataClass(idParagraph,R.drawable.pa1, null,1,i)
             idParagraph++
-            var item2 = ParagraphDataClass(idParagraph,R.drawable.pa2, null,2,i)
+            var item2 = DucParagraphDataClass(idParagraph,R.drawable.pa2, null,2,i)
             idParagraph++
-            var item3 = ParagraphDataClass(idParagraph,R.drawable.pa3, null,3,i)
+            var item3 = DucParagraphDataClass(idParagraph,R.drawable.pa3, null,3,i)
             idParagraph++
-            var item4 = ParagraphDataClass(idParagraph,R.drawable.pa4, null,4,i)
+            var item4 = DucParagraphDataClass(idParagraph,R.drawable.pa4, null,4,i)
             idParagraph++
             addParagraph(arrayOf(item1,item2,item3,item4))
 
         }
         for(i in 25..48){
-            var item1 = ParagraphDataClass(idParagraph,null, getLoremIpsumLong(),1,i,false)
+            var item1 = DucParagraphDataClass(idParagraph,null, getLoremIpsumLong(),1,i,false)
             idParagraph++
-            var item2 = ParagraphDataClass(idParagraph,null, getLoremIpsumLong(),1,i,false)
+            var item2 = DucParagraphDataClass(idParagraph,null, getLoremIpsumLong(),1,i,false)
             idParagraph++
-            var item3 = ParagraphDataClass(idParagraph,null, getLoremIpsumLong(),1,i,false)
+            var item3 = DucParagraphDataClass(idParagraph,null, getLoremIpsumLong(),1,i,false)
             idParagraph++
-            var item4 = ParagraphDataClass(idParagraph,null, getLoremIpsumLong(),1,i,false)
+            var item4 = DucParagraphDataClass(idParagraph,null, getLoremIpsumLong(),1,i,false)
             idParagraph++
             addParagraph(arrayOf(item1,item2,item3,item4))
         }
@@ -251,15 +249,15 @@ object SampleDataStory {
 
     }
     //---------------------------------------------------
-     fun addComment(item: CommentDataClass ){
+     fun addComment(item: DucCommentDataClass ){
         listOfComment.add(item)
     }
     fun addUserComment(idStory:Int,content:String,date:String){
 
-        listOfComment.add(CommentDataClass(getNextIdComment(),idStory,idUser,content,date))
+        listOfComment.add(DucCommentDataClass(getNextIdComment(),idStory,idUser,content,date))
     }
 
-    fun getListOfComment(context: Context): List<CommentDataClass>{
+    fun getListOfComment(context: Context): List<DucCommentDataClass>{
 //        listOfComment.clear()
 //        generateListOfComment()
         return  listOfComment
@@ -269,18 +267,18 @@ object SampleDataStory {
         for(story in dataList)
         {
             for(i in 1..3){
-                var item = CommentDataClass(getNextIdComment() ,story.idStory,i, getLoremIpsum(),"11/11/2004")
+                var item = DucCommentDataClass(getNextIdComment() ,story.idStory,i, getLoremIpsum(),"11/11/2004")
 
                 addComment(item)
             }
-            addComment(CommentDataClass(getNextIdComment(),story.idStory,idUser,getLoremIpsumLong(),date))
+            addComment(DucCommentDataClass(getNextIdComment(),story.idStory,idUser,getLoremIpsumLong(),date))
 
 
-            addComment(CommentDataClass(getNextIdComment(),story.idStory,idUser,getLoremIpsum(),date))
+            addComment(DucCommentDataClass(getNextIdComment(),story.idStory,idUser,getLoremIpsum(),date))
 
 
             for (i in 6..8) {
-                var item = CommentDataClass(getNextIdComment(),story.idStory, i, getLoremIpsumLong(), "11/11/2004")
+                var item = DucCommentDataClass(getNextIdComment(),story.idStory, i, getLoremIpsumLong(), "11/11/2004")
                 addComment(item)
             }
         }
